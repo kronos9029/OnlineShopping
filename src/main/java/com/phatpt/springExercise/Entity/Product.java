@@ -16,7 +16,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productID;
     private String productName;
-    private String categoryID;
+    private long categoryID;
     private float productPrice;
     private String image;
     private Date createDate;
@@ -27,7 +27,7 @@ public class Product {
         super();
     }
 
-    public Product(String productName, String categoryID, float productPrice, String image, Date createDate,
+    public Product(String productName, long categoryID, float productPrice, String image, Date createDate,
             Date updateDate, String productDescription) {
         this.productName = productName;
         this.categoryID = categoryID;
@@ -54,11 +54,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getCategoryID() {
+    public long getCategoryID() {
         return categoryID;
     }
 
-    public void setCategoryID(String categoryID) {
+    public void setCategoryID(long categoryID) {
         this.categoryID = categoryID;
     }
 
