@@ -1,5 +1,6 @@
 package com.phatpt.springExercise.Entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,11 +11,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_product")
-public class Product {
+public class Product implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long productID;
+    private long productId;
     private String productName;
     private long categoryID;
     private float productPrice;
@@ -39,11 +40,11 @@ public class Product {
     }
 
     public long getProductID() {
-        return productID;
+        return productId;
     }
 
-    public void setProductID(long productID) {
-        this.productID = productID;
+    public void setProductID(long productId) {
+        this.productId = productId;
     }
 
     public String getProductName() {
