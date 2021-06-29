@@ -64,7 +64,7 @@ public class productController {
     }
     
     //Delete Product
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/products/{id}")
     public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productId){
         Product product = productRepository.findById(productId)
                                         .orElseThrow(() -> new ProductNotFoundException(productId));
