@@ -3,13 +3,18 @@ package com.phatpt.springExercise.Entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_product")
 public class Product {
 
-    private String productID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long productID;
     private String productName;
     private String categoryID;
     private float productPrice;
@@ -33,11 +38,11 @@ public class Product {
         this.productDescription = productDescription;
     }
 
-    public String getProductID() {
+    public long getProductID() {
         return productID;
     }
 
-    public void setProductID(String productID) {
+    public void setProductID(long productID) {
         this.productID = productID;
     }
 
