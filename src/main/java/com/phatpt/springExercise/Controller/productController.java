@@ -54,7 +54,7 @@ public class productController {
                                         .orElseThrow(() -> new ProductNotFoundException(productId));
         
         product.setProductName(productDetail.getProductName());
-        product.setCategoryID(productDetail.getCategoryID());
+        product.setCategory(productDetail.getCategory());
         product.setProductPrice(productDetail.getProductPrice());
         product.setImage(productDetail.getImage());
         product.setProductDescription(productDetail.getProductDescription());

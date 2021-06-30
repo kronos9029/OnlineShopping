@@ -2,11 +2,18 @@ package com.phatpt.springExercise.Entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,36 +22,70 @@ public class Product implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private long productId;
+
+    @Column(name = "product_name")
     private String productName;
-    private long categoryID;
+
+    @Column(name = "product_price")
     private float productPrice;
+
+    @Column(name = "image")
     private String image;
+
+    @Column(name = "create_date")
     private Date createDate;
+
+    @Column(name = "update_date")
     private Date updateDate;
+
+    @Column(name = "update_Description")
     private String productDescription;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cate_id")
+    private Category category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<OrderDetail> orderDetail;
     
     public Product() {
         super();
     }
 
-    public Product(String productName, long categoryID, float productPrice, String image, Date createDate,
+    public Product(String productName, float productPrice, String image, Date createDate,
             Date updateDate, String productDescription) {
         this.productName = productName;
-        this.categoryID = categoryID;
         this.productPrice = productPrice;
         this.image = image;
         this.createDate = createDate;
         this.updateDate = updateDate;
         this.productDescription = productDescription;
     }
+    
+    public Set<OrderDetail> getOrderDetail() {
+        return orderDetail;
+    }
 
-    public long getProductID() {
+    public void setOrderDetail(Set<OrderDetail> orderDetail) {
+        this.orderDetail = orderDetail;
+    }
+
+    public long getProductId() {
         return productId;
     }
 
-    public void setProductID(long productId) {
+    public void setProductId(long productId) {
         this.productId = productId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getProductName() {
@@ -53,14 +94,6 @@ public class Product implements Serializable{
 
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public long getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(long categoryID) {
-        this.categoryID = categoryID;
     }
 
     public float getProductPrice() {

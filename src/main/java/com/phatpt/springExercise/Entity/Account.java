@@ -1,24 +1,47 @@
 package com.phatpt.springExercise.Entity;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "tbl_account")
-public class Account implements Serializable{
+public class Account{
     @Id
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
+    
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "full_name")
     private String fullName;
+
+    @Column(name = "role")
     private String role;
+
+    @Column(name = "status")
     private String status;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "create_date")
     private Date createDate;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Order> order;
     
     public Account() {
         super();
@@ -36,7 +59,13 @@ public class Account implements Serializable{
         this.createDate = createDate;
     }
 
+    public Set<Order> getOrder() {
+        return order;
+    }
 
+    public void setOrder(Set<Order> order) {
+        this.order = order;
+    }
 
     public String getEmail() {
         return email;

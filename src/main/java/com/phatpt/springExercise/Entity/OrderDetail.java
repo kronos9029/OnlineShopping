@@ -1,32 +1,45 @@
 package com.phatpt.springExercise.Entity;
 
-import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_orderdetail")
-public class OrderDetail implements Serializable{
+public class OrderDetail{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String orderDetailId;
-    private String orderId;
-    private String productId;
+
+    @Column(name = "amount")
     private int amount;
+
+    @Column(name = "feed_back")
     private String feedback;
+
+    @Column(name = "star")
     private int star;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    private Order order;
     
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
     public OrderDetail() {
         super();
     }
 
-    public OrderDetail(String orderId, String productId, int amount, String feedback, int star) {
-        this.orderId = orderId;
-        this.productId = productId;
+    public OrderDetail(int amount, String feedback, int star) {
         this.amount = amount;
         this.feedback = feedback;
         this.star = star;
@@ -38,22 +51,6 @@ public class OrderDetail implements Serializable{
 
     public void setOrderDetailID(String orderDetailID) {
         this.orderDetailId = orderDetailID;
-    }
-
-    public String getOrderID() {
-        return orderId;
-    }
-
-    public void setOrderID(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getProductID() {
-        return productId;
-    }
-
-    public void setProductID(String productId) {
-        this.productId = productId;
     }
 
     public int getAmount() {
