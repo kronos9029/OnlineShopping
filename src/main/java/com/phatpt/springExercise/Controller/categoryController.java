@@ -1,12 +1,10 @@
 package com.phatpt.springExercise.Controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Exception.CategoryNotFoundException;
-import com.phatpt.springExercise.Repository.categoryRepository;
+import com.phatpt.springExercise.Service.categoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,54 +19,41 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class categoryController {
     
+    private final categoryService categoryService;
+
     @Autowired
-    private categoryRepository categoryRepository;
+    public categoryController(categoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     //Get All Category
     @GetMapping("/categories")
     public List<Category> getAllCategories(){
-        return this.categoryRepository.findAll();
+        return categoryService.getAllCategories();
     }
 
     //Get Cate By ID
     @GetMapping("/categories/{id}")
-    public ResponseEntity<Category> getProductById(@PathVariable(value = "id") Long cateId) 
-            throws CategoryNotFoundException{
-        Category category = categoryRepository.findById(cateId)
-                                        .orElseThrow(() -> new CategoryNotFoundException(cateId));
-        
-        return ResponseEntity.ok().body(category);
+    public ResponseEntity<Category> getProductById(@PathVariable(value = "id") Long cateId) {
+            return categoryService.getProductById(cateId);
     }
 
     //Save Cate
     @PostMapping("/categories")
     public Category createCate(@RequestBody Category newCate){
-        return this.categoryRepository.save(newCate);
+        return categoryService.createCate(newCate);
     }
 
     //Update Cate
     @PutMapping("/categories/{id}")
     public ResponseEntity<Category> updateCategory(@RequestBody Category cateDetail, @PathVariable(value = "id") Long cateId){
-        Category category = categoryRepository.findById(cateId)
-                                        .orElseThrow(() -> new CategoryNotFoundException(cateId));
-        
-        category.setCateName(cateDetail.getCateName());
-        category.setCateDescription(cateDetail.getCateDescription());
-
-        return ResponseEntity.ok(this.categoryRepository.save(category));
+        return categoryService.updateCategory(cateDetail, cateId);
     }
 
     //Delete Product
     @DeleteMapping("/categories/{id}")
     public Map<String, Boolean> deleteCate(@PathVariable(value = "id") Long cateId){
-        Category category = categoryRepository.findById(cateId)
-                                        .orElseThrow(() -> new CategoryNotFoundException(cateId));
-        this.categoryRepository.delete(category);
-
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("Deleted", Boolean.TRUE);
-
-        return response;
+        return categoryService.deleteCate(cateId);
     }
 
 }

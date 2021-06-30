@@ -2,9 +2,8 @@ package com.phatpt.springExercise.Entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -46,9 +44,6 @@ public class Product implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cate_id")
     private Category category;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<OrderDetail> orderDetail;
     
     public Product() {
         super();
@@ -62,14 +57,6 @@ public class Product implements Serializable{
         this.createDate = createDate;
         this.updateDate = updateDate;
         this.productDescription = productDescription;
-    }
-    
-    public Set<OrderDetail> getOrderDetail() {
-        return orderDetail;
-    }
-
-    public void setOrderDetail(Set<OrderDetail> orderDetail) {
-        this.orderDetail = orderDetail;
     }
 
     public long getProductId() {
