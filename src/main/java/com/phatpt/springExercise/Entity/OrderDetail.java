@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class OrderDetail{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String orderDetailId;
+    private long orderDetailId;
 
     @Column(name = "amount")
     private int amount;
@@ -45,12 +45,12 @@ public class OrderDetail{
         this.star = star;
     }
 
-    public String getOrderDetailID() {
+    public long getOrderDetailId() {
         return orderDetailId;
     }
 
-    public void setOrderDetailID(String orderDetailID) {
-        this.orderDetailId = orderDetailID;
+    public void setOrderDetailId(long orderDetailId) {
+        this.orderDetailId = orderDetailId;
     }
 
     public int getAmount() {
@@ -77,8 +77,20 @@ public class OrderDetail{
         this.star = star;
     }
 
-    
+    public Order getOrder() {
+        return order;
+    }
 
-    
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
 }

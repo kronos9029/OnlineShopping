@@ -20,8 +20,7 @@ public class categoryService {
     private final productService productService;
 
     @Autowired
-    public categoryService(com.phatpt.springExercise.Repository.categoryRepository categoryRepository,
-            com.phatpt.springExercise.Service.productService productService) {
+    public categoryService(categoryRepository categoryRepository, productService productService) {
         this.categoryRepository = categoryRepository;
         this.productService = productService;
     }

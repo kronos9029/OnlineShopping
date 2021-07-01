@@ -44,7 +44,7 @@ public class Product implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cate_id")
     private Category category;
-    
+
     public Product() {
         super();
     }

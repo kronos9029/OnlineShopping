@@ -55,7 +55,7 @@ public class productController {
     public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productId){
         return productService.deleteProduct(productId);
     }
-
+    
     //Find All Product By CateID
     @GetMapping("/products/byid/{cateId}")
     public List<Product> findAlProductsByCateId(@PathVariable(value = "cateId") long cateId){
