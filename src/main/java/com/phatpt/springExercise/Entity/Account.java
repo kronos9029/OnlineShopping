@@ -1,8 +1,9 @@
 package com.phatpt.springExercise.Entity;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,7 +31,7 @@ import javax.persistence.UniqueConstraint;
     })
 
 })
-public class Account{
+public class Account implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private long userId;
@@ -66,18 +67,18 @@ public class Account{
     @JoinTable(name = "account_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> role = new ArrayList<>();
+    private Set<Role> role = new HashSet<>();
     
     public Account() {
         super();
     }
 
-    public Account(String email, String password, String fullName, String status, String address,
-            String phone, Date createDate) {
+    public Account(String username, String email, String password, String fullName, String address, String phone,
+            Date createDate) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
-        this.status = status;
         this.address = address;
         this.phone = phone;
         this.createDate = createDate;
@@ -155,13 +156,6 @@ public class Account{
         this.userId = userId;
     }
 
-    public List<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(List<Role> role) {
-        this.role = role;
-    }
 
     public String getUsername() {
         return username;
@@ -171,9 +165,30 @@ public class Account{
         this.username = username;
     }
 
-    
+    public Set<Role> getRole() {
+        return role;
+    }
 
-    
+    public void setRole(Set<Role> role) {
+        this.role = role;
+    }
+
+    @Override
+	public int hashCode() {
+		return Objects.hash(userId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		return Objects.equals(userId, other.userId);
+	}
 
 
 }

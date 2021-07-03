@@ -1,6 +1,7 @@
 package com.phatpt.springExercise.Entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,16 +20,18 @@ public class Role implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private long roleId;
 
     @Enumerated(EnumType.STRING)
     @NaturalId
-    @Column(length = 60)
-    private RoleName roleName;
+    @Column(name = "role_name", length = 60)
+    private RoleName name;
 
-    public Role(long roleId, RoleName roleName) {
+    public Role(long roleId, RoleName name) {
+        super();
         this.roleId = roleId;
-        this.roleName = roleName;
+        this.name = name;
     }
 
     public long getRoleId() {
@@ -40,13 +43,29 @@ public class Role implements Serializable{
     }
 
     public RoleName getRoleName() {
-        return roleName;
+        return name;
     }
 
-    public void setRoleName(RoleName roleName) {
-        this.roleName = roleName;
+    public void setRoleName(RoleName name) {
+        this.name = name;
     }
 
+    @Override
+	public int hashCode() {
+		return Objects.hash(roleId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Role other = (Role) obj;
+		return Objects.equals(roleId, other.roleId);
+	}
     
 
     
