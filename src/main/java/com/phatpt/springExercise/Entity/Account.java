@@ -1,21 +1,43 @@
 package com.phatpt.springExercise.Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "tbl_account")
+@Table(name = "tbl_account", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {
+        "email"
+    }),
+    @UniqueConstraint(columnNames = {
+        "username"
+    })
+
+})
 public class Account{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private long userId;
+
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
     
@@ -24,9 +46,6 @@ public class Account{
 
     @Column(name = "full_name")
     private String fullName;
-
-    @Column(name = "role")
-    private String role;
 
     @Column(name = "status")
     private String status;
@@ -43,16 +62,21 @@ public class Account{
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> order;
     
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "account_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> role = new ArrayList<>();
+    
     public Account() {
         super();
     }
 
-    public Account(String email, String password, String fullName, String role, String status, String address,
+    public Account(String email, String password, String fullName, String status, String address,
             String phone, Date createDate) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
-        this.role = role;
         this.status = status;
         this.address = address;
         this.phone = phone;
@@ -91,14 +115,6 @@ public class Account{
         this.fullName = fullName;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -129,6 +145,30 @@ public class Account{
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public List<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(List<Role> role) {
+        this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     

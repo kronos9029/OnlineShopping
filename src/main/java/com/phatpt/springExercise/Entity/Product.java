@@ -123,6 +123,13 @@ public class Product implements Serializable{
         this.productDescription = productDescription;
     }
 
+    @Override
+    public String toString() {
+        return "Product [category=" + category.getCateName() + ", createDate=" + createDate + ", image=" + image
+                + ", productDescription=" + productDescription + ", productId=" + productId + ", productName="
+                + productName + ", productPrice=" + productPrice + ", updateDate=" + updateDate + "]";
+    }
+
     
 
 }
