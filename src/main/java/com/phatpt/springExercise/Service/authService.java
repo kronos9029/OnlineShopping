@@ -80,7 +80,6 @@ public class authService {
                 .body(new messageResponse("Error: Email is already in use!"));
         }
 
-        // Create new user's account
         Account account = new Account(request.getUsername(), 
                                       request.getEmail(), 
                                       encoder.encode(request.getPassword()), 
@@ -103,12 +102,6 @@ public class authService {
                         Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
-
-                        break;
-                    case "pm":
-                        Role modRole = roleRepository.findByName(RoleName.ROLE_PM)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
 
                         break;
                     default:

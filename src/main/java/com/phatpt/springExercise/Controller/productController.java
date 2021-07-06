@@ -10,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/auth")
 public class productController {
 
     private final productService productService;
@@ -45,7 +47,7 @@ public class productController {
     }
 
     //Update Product
-    @PutMapping("/products/{id}")
+    @PatchMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@RequestBody Product productDetail, @PathVariable(value = "id") Long productId){
         return productService.updateProduct(productDetail, productId);
     }
@@ -58,6 +60,7 @@ public class productController {
     
     //Find All Product By CateID
     @GetMapping("/products/byid/{cateId}")
+    //request param @GetMapping("/products?cateId=")<---
     public List<Product> findAlProductsByCateId(@PathVariable(value = "cateId") long cateId){
         return productService.findAllProductsByCateId(cateId);
     }

@@ -1,19 +1,30 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Welcome to CodeJava Home</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-</head>
-<body>
-    <div class="container text-center">
-        <h1>Welcome to CodeJava.net</h1>
-        <h3>List of Users</h3>
-        <h3>Register</h3>
-        <h3>Login</h3>
-    </div>
-     
-</body>
+<html xmlns:th="http://www.thymeleaf.org"  
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">  
+<head>  
+    <!--/*/ <th:block th:include="fragments/head :: head"/> /*/-->  
+</head>  
+<body>  
+<div class="container-fluid">  
+    <div class="row">  
+        <div class="box col-md-6 col-md-offset-3">  
+            <div class="okta-header">  
+                <img src="img/logo.png"/>  
+            </div>  
+  
+            <!--/* displayed if account IS NOT null, indicating that the user IS logged in */-->  
+            <div th:if="${#authorization.expression('isAuthenticated()')}">  
+                <h1 th:inline="text">Hello, <span th:text="${#authentication.name}"></span>!</h1>  
+            </div>  
+              
+            <!--/* displayed if account IS null, indicating that the user IS NOT logged in */-->  
+            <div th:unless="${#authorization.expression('isAuthenticated()')}">  
+                <h1>Who are you?</h1>  
+            </div>  
+  
+            <a href="/restricted" class="btn btn-primary">Restricted</a>  
+  
+        </div>  
+    </div>  
+</div>  
+</body>  
 </html>

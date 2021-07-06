@@ -28,8 +28,11 @@ public class Role implements Serializable{
     @Column(name = "role_name", length = 60)
     private RoleName name;
 
+    
+    public Role() {
+    }
+
     public Role(long roleId, RoleName name) {
-        super();
         this.roleId = roleId;
         this.name = name;
     }

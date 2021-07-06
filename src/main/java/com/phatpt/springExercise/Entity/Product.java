@@ -45,18 +45,23 @@ public class Product implements Serializable{
     @JoinColumn(name = "cate_id")
     private Category category;
 
+    @Column(name = "quantity")
+    private int quantity;
+
     public Product() {
         super();
     }
 
-    public Product(String productName, float productPrice, String image, Date createDate,
-            Date updateDate, String productDescription) {
+    public Product(String productName, float productPrice, String image, Date createDate, Date updateDate,
+            String productDescription, Category category, int quantity) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.image = image;
         this.createDate = createDate;
         this.updateDate = updateDate;
         this.productDescription = productDescription;
+        this.category = category;
+        this.quantity = quantity;
     }
 
     public long getProductId() {
