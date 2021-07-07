@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class accountDetailImpl implements UserDetails{
+public class AccountDetailImpl implements UserDetails{
 
     private static final long serialVersionUID = 1L;
 
@@ -27,7 +27,7 @@ public class accountDetailImpl implements UserDetails{
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public accountDetailImpl(Long id, String username, String email, String password,
+    public AccountDetailImpl(Long id, String username, String email, String password,
             Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
@@ -36,12 +36,12 @@ public class accountDetailImpl implements UserDetails{
         this.authorities = authorities;
     }
 
-    public static accountDetailImpl build(Account account) {
+    public static AccountDetailImpl build(Account account) {
         List<GrantedAuthority> authorities = account.getRole().stream()
             .map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
             .collect(Collectors.toList());
 
-        return new accountDetailImpl(
+        return new AccountDetailImpl(
             account.getUserId(),
             account.getUsername(),
             account.getEmail(),
@@ -98,7 +98,7 @@ public class accountDetailImpl implements UserDetails{
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        accountDetailImpl user = (accountDetailImpl) o;
+        AccountDetailImpl user = (AccountDetailImpl) o;
         return Objects.equals(id, user.id);        
     }
     

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Service.productService;
+import com.phatpt.springExercise.Service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,53 +15,53 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
-public class productController {
+@RequestMapping("/products")
+public class ProductController {
 
-    private final productService productService;
+    private final ProductService productService;
 
     @Autowired
-    public productController(com.phatpt.springExercise.Service.productService productService) {
+    public ProductController(com.phatpt.springExercise.Service.ProductService productService) {
         this.productService = productService;
     }
 
     //Get All Product
-    @GetMapping("/products")
+    @GetMapping("/")
     public List<Product> getAllProduct(){
         return (List<Product>) productService.getAllProduct();
     }
 
     //Get Product By ID
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable(value = "id") Long productId) {
         return productService.getProductById(productId);
     }
 
     //Save Product
-    @PostMapping("/products")
+    @PostMapping("/")
     public Product createProduct(@RequestBody Product newProduct){
         return productService.createProduct(newProduct);
     }
 
     //Update Product
-    @PatchMapping("/products/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@RequestBody Product productDetail, @PathVariable(value = "id") Long productId){
         return productService.updateProduct(productDetail, productId);
     }
     
     //Delete Product
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteProduct(@PathVariable(value = "id") Long productId){
         return productService.deleteProduct(productId);
     }
     
     //Find All Product By CateID
-    @GetMapping("/products/byid/{cateId}")
-    //request param @GetMapping("/products?cateId=")<---
-    public List<Product> findAlProductsByCateId(@PathVariable(value = "cateId") long cateId){
+    @GetMapping("/byCateId?{cateId}")
+    public List<Product> findAlProductsByCateId(@RequestParam("cateID") long cateId){
         return productService.findAllProductsByCateId(cateId);
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface orderDetailRepository extends CrudRepository<OrderDetail, Long>{
+public interface OrderDetailRepository extends CrudRepository<OrderDetail, Long>{
     
     @Query("FROM OrderDetail WHERE order_id = ?1")
     List<OrderDetail> findDetailByOrderId(long orderId);

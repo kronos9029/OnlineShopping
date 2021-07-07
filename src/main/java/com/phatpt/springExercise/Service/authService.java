@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import com.phatpt.springExercise.Entity.Account;
 import com.phatpt.springExercise.Entity.Role;
 import com.phatpt.springExercise.Entity.RoleName;
-import com.phatpt.springExercise.Repository.accountRepository;
-import com.phatpt.springExercise.Repository.roleRepository;
-import com.phatpt.springExercise.Security.Service.accountDetailImpl;
+import com.phatpt.springExercise.Repository.AccountRepository;
+import com.phatpt.springExercise.Repository.RoleRepository;
+import com.phatpt.springExercise.Security.Service.AccountDetailImpl;
 import com.phatpt.springExercise.Security.jwt.JwtUtils;
 import com.phatpt.springExercise.payload.request.loginRequest;
 import com.phatpt.springExercise.payload.request.registerRequest;
@@ -27,17 +27,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class authService {
+public class AuthService {
     
     private final AuthenticationManager authenticationManager;
-    private final accountRepository accountRepository;
-    private final roleRepository roleRepository;
+    private final AccountRepository accountRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
     private final JwtUtils jwtUtils;
 
-    public authService(AuthenticationManager authenticationManager,
-                        accountRepository accountRepository,
-                        roleRepository roleRepository, PasswordEncoder encoder,
+    public AuthService(AuthenticationManager authenticationManager,
+                        AccountRepository accountRepository,
+                        RoleRepository roleRepository, PasswordEncoder encoder,
                         JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.accountRepository = accountRepository;
@@ -55,7 +55,7 @@ public class authService {
         
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        accountDetailImpl userDetails = (accountDetailImpl) authentication.getPrincipal();
+        AccountDetailImpl userDetails = (AccountDetailImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
             .map(item -> item.getAuthority())
             .collect(Collectors.toList());

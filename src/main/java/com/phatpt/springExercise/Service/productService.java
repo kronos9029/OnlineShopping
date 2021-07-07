@@ -7,20 +7,20 @@ import java.util.Map;
 
 import com.phatpt.springExercise.Entity.Product;
 import com.phatpt.springExercise.Exception.ProductNotFoundException;
-import com.phatpt.springExercise.Repository.productRepository;
+import com.phatpt.springExercise.Repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class productService {
+public class ProductService {
     
-    private final productRepository productRepository;
+    private final ProductRepository productRepository;
     Date currentDate = new Date();
 
     @Autowired
-    public productService(productRepository productRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

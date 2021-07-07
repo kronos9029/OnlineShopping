@@ -1,31 +1,70 @@
 package com.phatpt.springExercise.Entity;
 
-import java.util.HashMap;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "shopping_cart")
 public class shoppingCart {
     
-    private String customerName;
-    private HashMap<String, Product> cart;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long cart_id;
 
-    public shoppingCart(String customerName, HashMap<String, Product> cart) {
-        this.customerName = customerName;
-        this.cart = cart;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    private int quantity;
+
+    public shoppingCart() {
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public shoppingCart(Account account, Product product, int quantity) {
+        this.account = account;
+        this.product = product;
+        this.quantity = quantity;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public long getCart_id() {
+        return cart_id;
     }
 
-    public HashMap<String, Product> getCart() {
-        return cart;
+    public void setCart_id(long cart_id) {
+        this.cart_id = cart_id;
     }
 
-    public void setCart(HashMap<String, Product> cart) {
-        this.cart = cart;
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     

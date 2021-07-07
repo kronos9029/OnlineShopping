@@ -2,7 +2,7 @@ package com.phatpt.springExercise.Controller;
 
 import javax.validation.Valid;
 
-import com.phatpt.springExercise.Service.authService;
+import com.phatpt.springExercise.Service.AuthService;
 import com.phatpt.springExercise.payload.request.loginRequest;
 import com.phatpt.springExercise.payload.request.registerRequest;
 
@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/public")
-public class authController {
+@RequestMapping("/public")
+public class AuthController {
     
-    private final authService authService;
+    private final AuthService authService;
 
     @Autowired
-    public authController(authService authService) {
+    public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody loginRequest request){
         return authService.authenticateUser(request);
     }

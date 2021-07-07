@@ -2,7 +2,7 @@ package com.phatpt.springExercise.Security.jwt;
 
 import java.util.Date;
 
-import com.phatpt.springExercise.Security.Service.accountDetailImpl;
+import com.phatpt.springExercise.Security.Service.AccountDetailImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class JwtUtils {
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication){
-        accountDetailImpl accountPrinciple = (accountDetailImpl) authentication.getPrincipal();
+        AccountDetailImpl accountPrinciple = (AccountDetailImpl) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject((accountPrinciple.getUsername()))

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Service.categoryService;
+import com.phatpt.springExercise.Service.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,43 +18,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
-
-public class categoryController {
+@RequestMapping("/categories")
+public class CategoryController {
     
-    private final categoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public categoryController(categoryService categoryService) {
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
     //Get All Category
-    @GetMapping("/categories")
+    @GetMapping("/")
     public List<Category> getAllCategories(){
         return categoryService.getAllCategories();
     }
 
     //Get Cate By ID
-    @GetMapping("/categories/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Category> getProductById(@PathVariable(value = "id") Long cateId) {
             return categoryService.getProductById(cateId);
     }
 
     //Save Cate
-    @PostMapping("/categories")
+    @PostMapping("/")
     public Category createCate(@RequestBody Category newCate){
         return categoryService.createCate(newCate);
     }
 
     //Update Cate
-    @PatchMapping("/categories/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Category> updateCategory(@RequestBody Category cateDetail, @PathVariable(value = "id") Long cateId){
         return categoryService.updateCategory(cateDetail, cateId);
     }
 
     //Delete Product
-    @DeleteMapping("/categories/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteCate(@PathVariable(value = "id") Long cateId){
         return categoryService.deleteCate(cateId);
     }

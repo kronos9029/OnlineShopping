@@ -6,18 +6,18 @@ import java.util.Map;
 
 import com.phatpt.springExercise.Entity.OrderDetail;
 import com.phatpt.springExercise.Exception.OrderDetailNotFoundException;
-import com.phatpt.springExercise.Repository.orderDetailRepository;
+import com.phatpt.springExercise.Repository.OrderDetailRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class orderDetailService {
+public class OrderDetailService {
     
-    private final orderDetailRepository orderDetailRepository;
+    private final OrderDetailRepository orderDetailRepository;
 
     @Autowired
-    public orderDetailService(com.phatpt.springExercise.Repository.orderDetailRepository orderDetailRepository) {
+    public OrderDetailService(com.phatpt.springExercise.Repository.OrderDetailRepository orderDetailRepository) {
         this.orderDetailRepository = orderDetailRepository;
     }
 

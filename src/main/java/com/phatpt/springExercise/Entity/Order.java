@@ -41,7 +41,7 @@ public class Order implements Serializable{
     private Date createDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "user_id")
     private Account account;
 
     @Column(name = "status")

@@ -8,21 +8,21 @@ import java.util.Map;
 import com.phatpt.springExercise.Entity.Order;
 import com.phatpt.springExercise.Entity.OrderDetail;
 import com.phatpt.springExercise.Exception.OrderNotFoundException;
-import com.phatpt.springExercise.Repository.orderRepository;
+import com.phatpt.springExercise.Repository.OrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class orderService {
+public class OrderService {
     
-    private final orderRepository orderRepository;
-    private final orderDetailService orderDetailService;
+    private final OrderRepository orderRepository;
+    private final OrderDetailService orderDetailService;
     Date currentDate = new Date();
 
     @Autowired
-    public orderService(orderRepository orderRepository, orderDetailService orderDetailService) {
+    public OrderService(OrderRepository orderRepository, OrderDetailService orderDetailService) {
         this.orderRepository = orderRepository;
         this.orderDetailService = orderDetailService;
     }
@@ -60,6 +60,10 @@ public class orderService {
         response.put("Deleted", Boolean.TRUE);
 
         return response;
+    }
+
+    public List<Order> getOrdersByUserId(Long userId){
+        return orderRepository.findOrdersByUserId(userId);
     }
     
 }

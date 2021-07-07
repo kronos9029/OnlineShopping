@@ -4,17 +4,17 @@ import java.util.List;
 
 import com.phatpt.springExercise.Entity.Role;
 import com.phatpt.springExercise.Exception.RoleExistException;
-import com.phatpt.springExercise.Repository.roleRepository;
+import com.phatpt.springExercise.Repository.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class roleService {
-    private final roleRepository roleRepository;
+public class RoleService {
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public roleService(com.phatpt.springExercise.Repository.roleRepository roleRepository) {
+    public RoleService(com.phatpt.springExercise.Repository.RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 

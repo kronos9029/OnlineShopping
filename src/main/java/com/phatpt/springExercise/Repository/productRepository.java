@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface productRepository extends JpaRepository<Product, Long>{
+public interface ProductRepository extends JpaRepository<Product, Long>{
 
     @Query("FROM Product WHERE cate_id = ?1")
     List<Product> findAllProductsByCateId(long cateId);

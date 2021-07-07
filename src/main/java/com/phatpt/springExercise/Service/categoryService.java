@@ -7,20 +7,20 @@ import java.util.Map;
 import com.phatpt.springExercise.Entity.Category;
 import com.phatpt.springExercise.Entity.Product;
 import com.phatpt.springExercise.Exception.CategoryNotFoundException;
-import com.phatpt.springExercise.Repository.categoryRepository;
+import com.phatpt.springExercise.Repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class categoryService {
+public class CategoryService {
     
-    private final categoryRepository categoryRepository;
-    private final productService productService;
+    private final CategoryRepository categoryRepository;
+    private final ProductService productService;
 
     @Autowired
-    public categoryService(categoryRepository categoryRepository, productService productService) {
+    public CategoryService(CategoryRepository categoryRepository, ProductService productService) {
         this.categoryRepository = categoryRepository;
         this.productService = productService;
     }

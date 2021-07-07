@@ -1,12 +1,13 @@
 package com.phatpt.springExercise.Security;
 
-import com.phatpt.springExercise.Security.Service.accountDeatailService;
+import com.phatpt.springExercise.Security.Service.AccountDetailService;
 import com.phatpt.springExercise.Security.jwt.JwtAuthEntryPoint;
 import com.phatpt.springExercise.Security.jwt.JwtAuthTokenFilter;
 import com.phatpt.springExercise.Security.jwt.JwtUtils;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,7 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     
-    private final accountDeatailService accountDeatailService;
+    private final AccountDetailService accountDeatailService;
 
     private final JwtAuthEntryPoint unauthorizedHandler;
 
@@ -34,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     
 
-    public WebSecurityConfig(accountDeatailService accountDeatailService,
+    public WebSecurityConfig(AccountDetailService accountDeatailService,
             JwtAuthEntryPoint unauthorizedHandler, JwtUtils jwtUtils) {
         this.accountDeatailService = accountDeatailService;
         this.unauthorizedHandler = unauthorizedHandler;
@@ -78,16 +79,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.cors().and().csrf().disable()
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-            .antMatchers("/api/public/**").permitAll().anyRequest().authenticated();
+            .authorizeRequests().antMatchers("/admin/roles").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.PATCH, "/categories/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST, "/categories/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.DELETE, "/categories/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.GET, "/categories/**").hasAnyRole("USER", "ADMIN")
+
+                                .antMatchers(HttpMethod.PATCH, "/products/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.GET, "/products/**").hasAnyRole("USER", "ADMIN")
+
+                                .antMatchers(HttpMethod.POST, "/orders").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.GET, "/orders").hasAnyRole("USER", "ADMIN")
+
+                                .antMatchers(HttpMethod.POST, "/orderDetails").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.GET, "/orderDetails").hasAnyRole("USER", "ADMIN")
+
+                                .antMatchers("/accounts/**").hasAnyRole("USER", "ADMIN")
+
+                                .antMatchers("/public/**").permitAll().anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
-
-    // @Override
-    // protected void configure(HttpSecurity http) throws Exception{
-    //     http.authorizeRequests()
-    // }
 
 
 }

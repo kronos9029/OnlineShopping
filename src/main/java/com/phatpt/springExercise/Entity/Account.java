@@ -29,14 +29,14 @@ import javax.persistence.UniqueConstraint;
     @UniqueConstraint(columnNames = {
         "username"
     })
-
 })
 public class Account implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private long userId;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -61,7 +61,7 @@ public class Account implements Serializable{
     private Date createDate;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Order> order;
+    private Set<Order> order = new HashSet<>();
     
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "account_roles",
