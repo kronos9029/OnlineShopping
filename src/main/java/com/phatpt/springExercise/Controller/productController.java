@@ -60,7 +60,7 @@ public class ProductController {
     }
     
     //Find All Product By CateID
-    @GetMapping("/byCateId?{cateId}")
+    @GetMapping("?byCateId={cateId}")
     public List<Product> findAlProductsByCateId(@RequestParam("cateID") long cateId){
         return productService.findAllProductsByCateId(cateId);
     }

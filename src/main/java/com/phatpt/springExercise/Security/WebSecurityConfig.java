@@ -83,12 +83,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                                 .antMatchers(HttpMethod.PATCH, "/categories/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.POST, "/categories/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.DELETE, "/categories/**").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.GET, "/categories/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.GET, "/categories/**").permitAll()
 
                                 .antMatchers(HttpMethod.PATCH, "/products/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.GET, "/products/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.GET, "/products/**").permitAll()
 
                                 .antMatchers(HttpMethod.POST, "/orders").hasAnyRole("USER", "ADMIN")
                                 .antMatchers(HttpMethod.GET, "/orders").hasAnyRole("USER", "ADMIN")
