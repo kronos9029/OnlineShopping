@@ -1,72 +1,59 @@
 package com.phatpt.springExercise.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.HashMap;
 
-@Entity
-@Table(name = "shopping_cart")
-public class shoppingCart {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long cart_id;
+public class ShoppingCart {
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Account account;
+    private String customerName;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    private HashMap<Long, Product> cart;
 
-    private int quantity;
-
-    public shoppingCart() {
+    public ShoppingCart() {
     }
 
-    public shoppingCart(Account account, Product product, int quantity) {
-        this.account = account;
-        this.product = product;
-        this.quantity = quantity;
+    public ShoppingCart(String customerName) {
+        this.customerName = customerName;
+        this.cart = new HashMap<>();
     }
 
-    public long getCart_id() {
-        return cart_id;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCart_id(long cart_id) {
-        this.cart_id = cart_id;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public Account getAccount() {
-        return account;
+    public HashMap<Long, Product> getCart() {
+        return cart;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setCart(HashMap<Long, Product> cart) {
+        this.cart = cart;
     }
 
-    public Product getProduct() {
-        return product;
-    }
+    public void addToCart(Product product) throws Exception{
+		if(this.cart.containsKey(product.getProductId())){
+			int newQuant = this.cart.get(product.getProductId()).getCartQuantity();
+            newQuant++;
+            this.cart.get(product.getProductId()).setCartQuantity(newQuant);
+		} else{
+            product.setCartQuantity(1);
+			this.cart.put(product.getProductId(), product);
+		}
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+    public void remove(Long id) throws Exception {
+		if(this.cart.containsKey(id)){
+			this.cart.remove(id);
+		}
+	}
 
-    public int getQuantity() {
-        return quantity;
+    public float getTotal() throws Exception{
+		float result = 0;
+		for(Product dto : this.cart.values()){
+			result += dto.getCartQuantity() * dto.getProductPrice();
+		}
+		return result;
     }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    
-    
 }

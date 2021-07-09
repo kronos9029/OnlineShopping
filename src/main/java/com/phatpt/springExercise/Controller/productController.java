@@ -1,5 +1,6 @@
 package com.phatpt.springExercise.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -60,8 +62,16 @@ public class ProductController {
     }
     
     //Find All Product By CateID
-    @GetMapping("?byCateId={cateId}")
-    public List<Product> findAlProductsByCateId(@RequestParam("cateID") long cateId){
-        return productService.findAllProductsByCateId(cateId);
+    @GetMapping("")
+    @ResponseBody
+    public List<Product> findAlProductsByCateId(@RequestParam("cateId") String cateId){
+        List<Product> productList = new ArrayList<>();
+        try {
+            long id = Long.parseLong(cateId);
+            productList = productService.findAllProductsByCateId(id);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return productList;
     }
 }

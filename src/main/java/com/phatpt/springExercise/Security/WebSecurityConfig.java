@@ -5,6 +5,7 @@ import com.phatpt.springExercise.Security.jwt.JwtAuthEntryPoint;
 import com.phatpt.springExercise.Security.jwt.JwtAuthTokenFilter;
 import com.phatpt.springExercise.Security.jwt.JwtUtils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -33,8 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final JwtUtils jwtUtils;
 
-    
-
+    @Autowired
     public WebSecurityConfig(AccountDetailService accountDeatailService,
             JwtAuthEntryPoint unauthorizedHandler, JwtUtils jwtUtils) {
         this.accountDeatailService = accountDeatailService;
@@ -84,20 +84,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                                 .antMatchers(HttpMethod.POST, "/categories/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.DELETE, "/categories/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.GET, "/categories/**").permitAll()
-
+                                
                                 .antMatchers(HttpMethod.PATCH, "/products/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.GET, "/products/**").permitAll()
+                                .antMatchers(HttpMethod.GET, "/products/**").permitAll()                        
 
-                                .antMatchers(HttpMethod.POST, "/orders").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.GET, "/orders").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.POST, "/orders/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.GET, "/orders/**").hasAnyRole("USER", "ADMIN")
 
-                                .antMatchers(HttpMethod.POST, "/orderDetails").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.GET, "/orderDetails").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.POST, "/orderDetails/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.GET, "/orderDetails/**").hasAnyRole("USER", "ADMIN")
 
                                 .antMatchers("/accounts/**").hasAnyRole("USER", "ADMIN")
-
+                                
                                 .antMatchers("/public/**").permitAll().anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

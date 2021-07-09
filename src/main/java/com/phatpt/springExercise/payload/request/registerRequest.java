@@ -7,11 +7,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class registerRequest {
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @Size(min = 6, max = 20)
+    @NotBlank(message = "Username Must Not Be Empty!!")
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "Email Must Not Be Empty!!")
     @Size(max = 50)
     @Email
     private String email;
@@ -22,6 +22,8 @@ public class registerRequest {
     @Size(min = 6, max = 40)
     private String password;
 
+    @NotBlank(message = "Full Name Must Not Be Empty!!")
+    @Size(min = 5)
     private String fullName;
 
     private String status;

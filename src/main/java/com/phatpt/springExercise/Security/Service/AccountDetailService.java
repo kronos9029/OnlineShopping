@@ -3,6 +3,7 @@ package com.phatpt.springExercise.Security.Service;
 import com.phatpt.springExercise.Entity.Account;
 import com.phatpt.springExercise.Repository.AccountRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,11 +15,10 @@ public class AccountDetailService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
 
+    @Autowired
     public AccountDetailService(com.phatpt.springExercise.Repository.AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
-
-
 
     @Override
     @Transactional

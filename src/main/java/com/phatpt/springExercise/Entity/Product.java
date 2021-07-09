@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name = "tbl_product")
@@ -24,12 +27,16 @@ public class Product implements Serializable{
     private long productId;
 
     @Column(name = "product_name")
+    @NotBlank
     private String productName;
 
     @Column(name = "product_price")
+    @NotBlank
+    @Positive
     private float productPrice;
 
     @Column(name = "image")
+    @NotBlank
     private String image;
 
     @Column(name = "create_date")
@@ -39,6 +46,7 @@ public class Product implements Serializable{
     private Date updateDate;
 
     @Column(name = "update_Description")
+    @NotBlank
     private String productDescription;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -47,6 +55,9 @@ public class Product implements Serializable{
 
     @Column(name = "quantity")
     private int quantity;
+
+    @Transient
+    private int cartQuantity;
 
     public Product() {
         super();
@@ -126,6 +137,22 @@ public class Product implements Serializable{
 
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getCartQuantity() {
+        return cartQuantity;
+    }
+
+    public void setCartQuantity(int cartQuantity) {
+        this.cartQuantity = cartQuantity;
     }
 
     @Override

@@ -22,16 +22,15 @@ public class OrderService {
     Date currentDate = new Date();
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, OrderDetailService orderDetailService) {
+    public OrderService(OrderRepository orderRepository, 
+                        OrderDetailService orderDetailService) {
         this.orderRepository = orderRepository;
         this.orderDetailService = orderDetailService;
-    }
+        }
 
     public List<Order> getAllOrder(){
         return (List<Order>) this.orderRepository.findAll();
     }
-
-
 
     public ResponseEntity<Order> getOrderById(long orderId) throws OrderNotFoundException{
         Order order = this.orderRepository.findById(orderId)
@@ -40,10 +39,14 @@ public class OrderService {
         return ResponseEntity.ok().body(order);
     }
 
-    public Order createOrder(Order newOrder){
-        newOrder.setCreateDate(currentDate);
-        return this.orderRepository.save(newOrder);
-    }
+    // public Order createOrder() throws Exception{
+    //     if(shoppingCart == null){
+    //         throw new Exception("Shopping Cart Empty!!");
+    //     }
+
+
+
+    // }
 
     public Map<String, Boolean> deleteOrder(Long orderId){
         Order order = orderRepository.findById(orderId)
