@@ -41,10 +41,17 @@ public class OrderDetail implements Serializable{
         super();
     }
 
-    public OrderDetail(int amount, String feedback, int star) {
-        this.amount = amount;
+    public OrderDetail(String feedback, int star, Order order, Product product) {
         this.feedback = feedback;
         this.star = star;
+        this.order = order;
+        this.product = product;
+    }
+
+    public OrderDetail(int amount, Order order, Product product) {
+        this.amount = amount;
+        this.order = order;
+        this.product = product;
     }
 
     public long getOrderDetailId() {

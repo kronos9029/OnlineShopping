@@ -23,7 +23,7 @@ public class AccountController {
 
     @GetMapping("/{username}")
     public Optional<Account> getAccountByUsername(@PathVariable(name = "username") String username){
-        return this.accountService.getAccountByUsername(username);
+        return this.accountService.findAccountByUsername(username);
     }
     
 }

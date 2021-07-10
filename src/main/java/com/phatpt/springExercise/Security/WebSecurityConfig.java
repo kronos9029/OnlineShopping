@@ -34,6 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final JwtUtils jwtUtils;
 
+    private static final String[] PUBLIC_MATCHERS = { "/css/**", "/js/**", "/image/**", "/book/**", "/user/**", "/**" };
+
     @Autowired
     public WebSecurityConfig(AccountDetailService accountDeatailService,
             JwtAuthEntryPoint unauthorizedHandler, JwtUtils jwtUtils) {
@@ -96,7 +98,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                                 .antMatchers(HttpMethod.POST, "/orderDetails/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers(HttpMethod.GET, "/orderDetails/**").hasAnyRole("USER", "ADMIN")
 
+                                .antMatchers(HttpMethod.POST, "/cart/**").hasRole("USER")
+
                                 .antMatchers("/accounts/**").hasAnyRole("USER", "ADMIN")
+
+                                .antMatchers(PUBLIC_MATCHERS).permitAll()
                                 
                                 .antMatchers("/public/**").permitAll().anyRequest().authenticated();
 

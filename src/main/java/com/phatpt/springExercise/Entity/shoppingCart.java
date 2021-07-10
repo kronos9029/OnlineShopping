@@ -4,24 +4,10 @@ import java.util.HashMap;
 
 public class ShoppingCart {
 
-    private String customerName;
-
     private HashMap<Long, Product> cart;
 
     public ShoppingCart() {
-    }
-
-    public ShoppingCart(String customerName) {
-        this.customerName = customerName;
         this.cart = new HashMap<>();
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 
     public HashMap<Long, Product> getCart() {

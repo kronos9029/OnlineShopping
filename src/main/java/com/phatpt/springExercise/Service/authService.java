@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.phatpt.springExercise.Entity.Account;
 import com.phatpt.springExercise.Entity.Role;
 import com.phatpt.springExercise.Entity.RoleName;
@@ -46,7 +48,7 @@ public class AuthService {
         this.jwtUtils = jwtUtils;
     }
 
-    public ResponseEntity<?> authenticateUser(loginRequest request) {
+    public ResponseEntity<?> authenticateUser(loginRequest request, HttpServletRequest seRequest) {
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
@@ -57,9 +59,12 @@ public class AuthService {
 
         AccountDetailImpl userDetails = (AccountDetailImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
-            .map(item -> item.getAuthority())
-            .collect(Collectors.toList());
+                                                         .map(item -> item.getAuthority())
+                                                         .collect(Collectors.toList());
 
+        
+        
+        seRequest.getSession().setAttribute("currentUsername", request.getUsername());
         return ResponseEntity.ok(new jwtResponse(jwt,
                                                  userDetails.getId(),
                                                  userDetails.getUsername(),

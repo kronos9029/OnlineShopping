@@ -1,5 +1,6 @@
 package com.phatpt.springExercise.Controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.phatpt.springExercise.Service.AuthService;
@@ -27,8 +28,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody loginRequest request){
-        return authService.authenticateUser(request);
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody loginRequest request, HttpServletRequest seRequest){
+        return authService.authenticateUser(request, seRequest);
     }
 
     @PostMapping("/register")

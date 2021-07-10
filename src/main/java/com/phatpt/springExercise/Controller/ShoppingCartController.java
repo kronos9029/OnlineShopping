@@ -1,13 +1,15 @@
 package com.phatpt.springExercise.Controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.phatpt.springExercise.Entity.ShoppingCart;
 import com.phatpt.springExercise.Service.ShoppingCartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,11 +23,13 @@ public class ShoppingCartController {
     }
 
     @PostMapping("")
-    @ResponseBody
-    public ShoppingCart addProductToCart(@RequestParam("productId") long productId,
-                                         @RequestParam("customerName") String customerName) throws Exception{
+    public ShoppingCart addProductToCart(@RequestParam("productId") long productId, HttpServletRequest request) throws Exception{
+        return this.shoppingCartService.addProductToCart(productId, request);
+    }
 
-        return this.shoppingCartService.addProductToCart(productId, customerName);
+    @DeleteMapping("")
+    public ShoppingCart removeProductFromCart(@RequestParam("productId") Long productId, HttpServletRequest request) throws Exception{
+        return this.shoppingCartService.removeProductFromCart(productId, request);
     }
 
     

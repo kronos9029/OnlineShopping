@@ -44,15 +44,24 @@ public class Order implements Serializable{
     @JoinColumn(name = "user_id")
     private Account account;
 
-    @Column(name = "status")
-    private String status;
-
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
     public Order() {
         super();
     }
+
+    public Order(float totalMoney, String customerName, String customerPhone, String customerAddress, Date createDate,
+            Account currentUser) {
+        this.totalMoney = totalMoney;
+        this.customerName = customerName;
+        this.customerPhone = customerPhone;
+        this.customerAddress = customerAddress;
+        this.createDate = createDate;
+        this.account = currentUser;
+    }
+
+
 
     public Order(float totalMoney, String customerName, String customerPhone,
             String customerAddress, Date createDate) {
@@ -117,14 +126,6 @@ public class Order implements Serializable{
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public List<OrderDetail> getOrderDetails() {

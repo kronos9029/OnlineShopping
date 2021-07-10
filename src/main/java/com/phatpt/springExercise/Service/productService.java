@@ -82,4 +82,9 @@ public class ProductService {
         response.put("Set NULL", Boolean.TRUE);
         return response;
     }
+
+    public Product updateQuantity(int remain, Product product){
+        product.setQuantity(remain);
+        return this.productRepository.save(product);
+    }
 }

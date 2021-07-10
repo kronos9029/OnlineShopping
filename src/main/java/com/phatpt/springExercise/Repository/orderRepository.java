@@ -14,4 +14,12 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
     @Query("FROM Order WHERE user_id = ?1")
     List<Order> findOrdersByUserId(Long userId);
 
+    // @Query("INSERT INTO Order VALUES()")
+    // boolean createOrder(float totalMoney, 
+    //                     String customerName, 
+    //                     String customerPhone, 
+    //                     String customerAddress, 
+    //                     Date createDate, 
+    //                     Account account);
+
 }

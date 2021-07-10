@@ -4,7 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import com.phatpt.springExercise.Entity.Order;
 import com.phatpt.springExercise.Entity.OrderDetail;
+import com.phatpt.springExercise.Entity.Product;
+import com.phatpt.springExercise.Entity.ShoppingCart;
 import com.phatpt.springExercise.Exception.OrderDetailNotFoundException;
 import com.phatpt.springExercise.Repository.OrderDetailRepository;
 
@@ -17,7 +22,7 @@ public class OrderDetailService {
     private final OrderDetailRepository orderDetailRepository;
 
     @Autowired
-    public OrderDetailService(com.phatpt.springExercise.Repository.OrderDetailRepository orderDetailRepository) {
+    public OrderDetailService(OrderDetailRepository orderDetailRepository) {
         this.orderDetailRepository = orderDetailRepository;
     }
 
@@ -40,8 +45,17 @@ public class OrderDetailService {
         return response;
     }
 
-    public OrderDetail createOrderDetail(OrderDetail newDetail){
-        return this.orderDetailRepository.save(newDetail);
+    public String createOrderDetail(Order newOrder, HttpSession session) throws Exception{
+        ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
+        if(shoppingCart == null){
+            throw new Exception("Cart Empty!!");
+        } else {
+            for (Product cartProduct : shoppingCart.getCart().values()) {
+                OrderDetail detail = new OrderDetail(cartProduct.getCartQuantity(), newOrder, cartProduct);
+                orderDetailRepository.save(detail);
+            }
+        }
+        return "Done!!";
     }
     
 }

@@ -70,6 +70,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+			<version>6.1.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.3.8</version>
+		</dependency>
+		<repository>
+			<id>spring-milestone</id>
+			<url>https://repo.spring.io/libs-milestone</url>
+		</repository>
 	</dependencies>
 
 	<build>

@@ -15,11 +15,23 @@ public class AccountService {
     @Autowired
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
+    }    
+
+
+
+    public Account getAccountByUsername(String username) throws Exception{
+        Account currentAccount =  accountRepository.getAccountByUsername(username);
+        if(currentAccount == null){
+            throw new Exception("User Not Found!!");
+        } else {
+            return currentAccount;
+        }
     }
 
-    public Optional<Account> getAccountByUsername(String username){
-        return accountRepository.findByUsername(username);
+    public Optional<Account> findAccountByUsername(String username){
+        return this.accountRepository.findByUsername(username);
     }
+
 
     
 }

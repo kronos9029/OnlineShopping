@@ -14,5 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
     @Query("FROM Product WHERE cate_id = ?1")
     List<Product> findAllProductsByCateId(long cateId);
 
+    @Query("FROM Product WHERE product_id = ?1")
+    Product findProductById(long productId);
 
 }
