@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.phatpt.springExercise.Entity.Product;
+import com.phatpt.springExercise.Entity.ShoppingCart;
 import com.phatpt.springExercise.Exception.ProductNotFoundException;
 import com.phatpt.springExercise.Repository.ProductRepository;
 
@@ -83,8 +86,18 @@ public class ProductService {
         return response;
     }
 
-    public Product updateQuantity(int remain, Product product){
-        product.setQuantity(remain);
-        return this.productRepository.save(product);
+    public void updateQuantity(HttpSession session) throws Exception{
+        ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
+        if(shoppingCart == null){
+            throw new Exception("Cart Empty!!");
+        }
+
+        for (Product cartProduct : shoppingCart.getCart().values()) {
+            Product product = productRepository.findProductById(cartProduct.getProductId());
+            int storage = product.getQuantity();
+            int buyQuantity = cartProduct.getCartQuantity();
+            int remain = storage - buyQuantity;
+            this.productRepository.updateQuantity(remain, cartProduct.getProductId());
+        }
     }
 }

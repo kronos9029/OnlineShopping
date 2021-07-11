@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.phatpt.springExercise.Entity.Order;
 import com.phatpt.springExercise.Service.OrderService;
+import com.phatpt.springExercise.Service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     private final OrderService orderService;
 
+    private final ProductService productService;
+
     @Autowired
-    public OrderController(com.phatpt.springExercise.Service.OrderService orderService) {
+        public OrderController(OrderService orderService, ProductService productService) {
         this.orderService = orderService;
+        this.productService = productService;
     }
 
     @GetMapping("/")
     public List<Order> getAllOrder(){
         return this.orderService.getAllOrder();
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable(value = "id") Long orderId) {
@@ -49,9 +52,14 @@ public class OrderController {
         return this.orderService.deleteOrder(orderId);
     }
 
-    @PostMapping("/confirm")
+    @PostMapping("/checkout")
     public Order createOrder(HttpSession session) throws Exception{
         return this.orderService.createOrder(session);
+    }
+
+    @PostMapping("/confirm")
+    public void updateProduct(HttpSession session) throws Exception{
+        this.productService.updateQuantity(session);
     }
     
 }

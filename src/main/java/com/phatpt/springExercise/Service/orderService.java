@@ -74,10 +74,6 @@ public class OrderService {
                                    currentUser);
         orderRepository.save(newOrder);
         orderDetailService.createOrderDetail(newOrder, session);
-        for (Product cartProduct : shoppingCart.getCart().values()) {
-            int remain = cartProduct.getQuantity() - cartProduct.getCartQuantity();
-            productService.updateQuantity(remain, cartProduct);
-        }
         
         return newOrder;
     }
@@ -102,5 +98,7 @@ public class OrderService {
     public List<Order> getOrdersByUserId(Long userId){
         return orderRepository.findOrdersByUserId(userId);
     }
+
+    
     
 }
