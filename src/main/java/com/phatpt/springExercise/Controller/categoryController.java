@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
-    
+
     private final CategoryService categoryService;
 
     @Autowired
@@ -28,33 +28,34 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    //Get All Category
+    // Get All Category
     @GetMapping("/")
-    public List<Category> getAllCategories(){
+    public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
-    //Get Cate By ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Category> getProductById(@PathVariable(value = "id") Long cateId) {
-            return categoryService.getProductById(cateId);
+    // Get Cate By ID
+    @GetMapping("/{cateId}")
+    public ResponseEntity<Category> getProductById(@PathVariable(value = "cateId") Long cateId) {
+        return categoryService.getProductById(cateId);
     }
 
-    //Save Cate
+    // Save Cate
     @PostMapping("/")
-    public Category createCate(@RequestBody Category newCate){
+    public Category createCate(@RequestBody Category newCate) {
         return categoryService.createCate(newCate);
     }
 
-    //Update Cate
-    @PatchMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@RequestBody Category cateDetail, @PathVariable(value = "id") Long cateId){
+    // Update Cate
+    @PutMapping("/{id}")
+    public ResponseEntity<Category> updateCategory(@RequestBody Category cateDetail,
+            @PathVariable(value = "id") Long cateId) {
         return categoryService.updateCategory(cateDetail, cateId);
     }
 
-    //Delete Product
+    // Delete Product
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteCate(@PathVariable(value = "id") Long cateId){
+    public Map<String, Boolean> deleteCate(@PathVariable(value = "id") Long cateId) {
         return categoryService.deleteCate(cateId);
     }
 

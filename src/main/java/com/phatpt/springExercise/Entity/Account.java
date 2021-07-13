@@ -21,6 +21,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "tbl_account", uniqueConstraints = {
@@ -62,6 +64,7 @@ public class Account implements Serializable{
     private Date createDate;
 
     @Transient
+    @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> order = new HashSet<>();
     

@@ -36,5 +36,10 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody registerRequest request){
         return authService.registerUser(request);
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request){
+        return authService.logout(request);
+    }
     
 }

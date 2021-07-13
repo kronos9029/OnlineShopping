@@ -15,46 +15,46 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "tbl_role")
-public class Role implements Serializable{
+@Table(name = "tbl_status")
+public class OrderStatus implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
-    private long roleId;
+    @Column(name = "status_id")
+    private long statusId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status_name")
     @NaturalId
-    @Column(name = "role_name", length = 60)
-    private RoleName name;
+    private StatusName name;
 
-    public Role() {
+    public OrderStatus() {
     }
 
-    public Role(long roleId, RoleName name) {
-        this.roleId = roleId;
+    public OrderStatus(long statusId, StatusName name) {
+        this.statusId = statusId;
         this.name = name;
     }
 
-    public long getRoleId() {
-        return roleId;
+    public long getStatusId() {
+        return statusId;
     }
 
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
+    public void setStatusId(long statusId) {
+        this.statusId = statusId;
     }
 
-    public RoleName getRoleName() {
+    public StatusName getStatusName() {
         return name;
     }
 
-    public void setRoleName(RoleName name) {
+    public void setStatusName(StatusName name) {
         this.name = name;
     }
 
     @Override
 	public int hashCode() {
-		return Objects.hash(roleId);
+		return Objects.hash(statusId);
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public class Role implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Role other = (Role) obj;
-		return Objects.equals(roleId, other.roleId);
+		OrderStatus other = (OrderStatus) obj;
+		return Objects.equals(statusId, other.statusId);
 	}
     
 }

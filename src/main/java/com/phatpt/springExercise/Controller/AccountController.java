@@ -7,8 +7,8 @@ import com.phatpt.springExercise.Service.AccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,8 +21,8 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/{username}")
-    public Optional<Account> getAccountByUsername(@PathVariable(name = "username") String username){
+    @GetMapping("/profile")
+    public Optional<Account> getAccountByUsername(@RequestParam("username") String username){
         return this.accountService.findAccountByUsername(username);
     }
     

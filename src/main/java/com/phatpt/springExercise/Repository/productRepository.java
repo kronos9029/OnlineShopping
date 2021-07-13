@@ -23,5 +23,5 @@ public interface ProductRepository extends CrudRepository<Product, Long>{
     @Transactional
     @Modifying
     @Query("UPDATE Product SET quantity = ?1 WHERE product_id = ?2")
-    void updateQuantity(int newQuantity, long productId);
+    int updateQuantity(int newQuantity, long productId);
 }

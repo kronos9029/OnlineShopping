@@ -13,8 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
@@ -31,7 +31,7 @@ public class Product implements Serializable{
     private String productName;
 
     @Column(name = "product_price")
-    @NotBlank
+    @NotNull
     @Positive
     private float productPrice;
 
@@ -56,7 +56,7 @@ public class Product implements Serializable{
     @Column(name = "quantity")
     private int quantity;
 
-    @Transient
+    @Column(name = "cart_quantity", nullable = true)
     private int cartQuantity;
 
     public Product() {

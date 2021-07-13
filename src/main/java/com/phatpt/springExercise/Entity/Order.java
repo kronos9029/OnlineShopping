@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,6 +41,13 @@ public class Order implements Serializable{
     @Column(name = "customer_address")
     private String customerAddress;
 
+    @Column(name = "status")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "order_status",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "status_id"))
+    private Set<OrderStatus> status;
+    
     @Column(name = "create_date")
     private Date createDate;
 
@@ -48,11 +59,9 @@ public class Order implements Serializable{
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
     public Order() {
-        super();
     }
 
-    public Order(float totalMoney, String customerName, String customerPhone, String customerAddress, Date createDate,
-            Account currentUser) {
+    public Order(float totalMoney, String customerName, String customerPhone, String customerAddress, Date createDate, Account currentUser) {
         this.totalMoney = totalMoney;
         this.customerName = customerName;
         this.customerPhone = customerPhone;
@@ -60,8 +69,6 @@ public class Order implements Serializable{
         this.createDate = createDate;
         this.account = currentUser;
     }
-
-
 
     public Order(float totalMoney, String customerName, String customerPhone,
             String customerAddress, Date createDate) {
@@ -134,9 +141,32 @@ public class Order implements Serializable{
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
-    }   
+    }
 
-    
+    public Set<OrderStatus> getStatus() {
+        return status;
+    }
+
+    public void setStatus(Set<OrderStatus> status) {
+        this.status = status;
+    }
+
+    @Override
+	public int hashCode() {
+		return Objects.hash(orderId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		return Objects.equals(orderId, other.orderId);
+	}
 
     
 }

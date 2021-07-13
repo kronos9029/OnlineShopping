@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tbl_category")
 public class Category implements Serializable{
@@ -31,6 +33,7 @@ public class Category implements Serializable{
     private String cateDescription;
 
     @Transient
+    @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products = new ArrayList<>();
 
@@ -39,6 +42,12 @@ public class Category implements Serializable{
     }
 
     public Category(String cateName, String cateDescription) {
+        this.cateName = cateName;
+        this.cateDescription = cateDescription;
+    }
+
+    public Category(long cateId, String cateName, String cateDescription) {
+        this.cateId = cateId;
         this.cateName = cateName;
         this.cateDescription = cateDescription;
     }

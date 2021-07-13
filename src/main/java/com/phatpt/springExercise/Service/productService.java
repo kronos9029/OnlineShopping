@@ -7,9 +7,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.phatpt.springExercise.Entity.Category;
 import com.phatpt.springExercise.Entity.Product;
 import com.phatpt.springExercise.Entity.ShoppingCart;
 import com.phatpt.springExercise.Exception.ProductNotFoundException;
+import com.phatpt.springExercise.Repository.CategoryRepository;
 import com.phatpt.springExercise.Repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,54 +20,62 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
-    
+
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
     Date currentDate = new Date();
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
-    //Get All Product
-    public List<Product> getAllProduct(){
+    // Get All Product
+    public List<Product> getAllProduct() {
         return (List<Product>) this.productRepository.findAll();
     }
 
-    //Get Product By ID
-    public ResponseEntity<Product> getProductById(Long productId) 
-            throws ProductNotFoundException{
+    // Get Product By ID
+    public ResponseEntity<Product> getProductById(Long productId) throws ProductNotFoundException {
         Product product = productRepository.findById(productId)
-                                        .orElseThrow(() -> new ProductNotFoundException(productId));
-        
+                .orElseThrow(() -> new ProductNotFoundException(productId));
+
         return ResponseEntity.ok().body(product);
     }
 
-    //Save Product
-    public Product createProduct(Product newProduct){
+    public Product createProduct(Product newProduct, long cateId) throws Exception {
+        Category category = categoryRepository.findCateById(cateId);
+        if (category == null) {
+            throw new Exception("Category Not Found!!");
+        }
         newProduct.setCreateDate(currentDate);
+        newProduct.setCategory(category);
+        newProduct.setCartQuantity(0);
         return this.productRepository.save(newProduct);
+
     }
 
-    //Update Product
-    public ResponseEntity<Product> updateProduct(Product productDetail, Long productId){
+    // Update Product
+    public ResponseEntity<Product> updateProduct(Product productDetail, Long productId) {
         Product product = productRepository.findById(productId)
-                                        .orElseThrow(() -> new ProductNotFoundException(productId));
-                
+                .orElseThrow(() -> new ProductNotFoundException(productId));
+
         product.setProductName(productDetail.getProductName());
         product.setCategory(productDetail.getCategory());
         product.setProductPrice(productDetail.getProductPrice());
         product.setImage(productDetail.getImage());
         product.setProductDescription(productDetail.getProductDescription());
         product.setUpdateDate(currentDate);
+        product.setCartQuantity(0);
 
         return ResponseEntity.ok(this.productRepository.save(product));
     }
-    
-    //Delete Product
-    public Map<String, Boolean> deleteProduct(Long productId){
+
+    // Delete Product
+    public Map<String, Boolean> deleteProduct(Long productId) {
         Product product = productRepository.findById(productId)
-                                        .orElseThrow(() -> new ProductNotFoundException(productId));
+                .orElseThrow(() -> new ProductNotFoundException(productId));
         this.productRepository.delete(product);
 
         Map<String, Boolean> response = new HashMap<>();
@@ -74,11 +84,11 @@ public class ProductService {
         return response;
     }
 
-    public List<Product> findAllProductsByCateId(long cateId){
+    public List<Product> findAllProductsByCateId(long cateId) {
         return this.productRepository.findAllProductsByCateId(cateId);
     }
 
-    public Map<String, Boolean> setProductCategoryIfDeleted(Product product){
+    public Map<String, Boolean> setProductCategoryIfDeleted(Product product) {
         product.setCategory(null);
         this.productRepository.save(product);
         Map<String, Boolean> response = new HashMap<>();
@@ -86,9 +96,9 @@ public class ProductService {
         return response;
     }
 
-    public void updateQuantity(HttpSession session) throws Exception{
+    public ShoppingCart updateQuantity(HttpSession session) throws Exception {
         ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
-        if(shoppingCart == null){
+        if (shoppingCart == null) {
             throw new Exception("Cart Empty!!");
         }
 
@@ -99,5 +109,7 @@ public class ProductService {
             int remain = storage - buyQuantity;
             this.productRepository.updateQuantity(remain, cartProduct.getProductId());
         }
+        session.removeAttribute("shoppingCart");
+        return shoppingCart;
     }
 }
