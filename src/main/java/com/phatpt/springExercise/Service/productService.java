@@ -44,7 +44,7 @@ public class ProductService {
         return ResponseEntity.ok().body(product);
     }
 
-    public Product createProduct(Product newProduct) throws Exception {
+    public Product createProduct(Product newProduct, long cateId) throws Exception {
         Category category = categoryRepository.findCateById(cateId);
         if (category == null) {
             throw new Exception("Category Not Found!!");

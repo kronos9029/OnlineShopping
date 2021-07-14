@@ -63,15 +63,15 @@ public class Product implements Serializable{
         super();
     }
 
-    public Product(String productName, String string, Date date, Date createDate, int i,
-            String productDescription, String string2, int quantity) {
+    public Product(String productName, float productPrice, String image, Date createDate, Date updateDate,
+            String productDescription, Category category, int quantity) {
         this.productName = productName;
-        this.productPrice = string;
-        this.image = date;
+        this.productPrice = productPrice;
+        this.image = image;
         this.createDate = createDate;
-        this.updateDate = i;
+        this.updateDate = updateDate;
         this.productDescription = productDescription;
-        this.category = string2;
+        this.category = category;
         this.quantity = quantity;
     }
 
