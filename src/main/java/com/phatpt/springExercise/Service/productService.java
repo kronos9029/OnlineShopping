@@ -37,7 +37,7 @@ public class ProductService {
 
     // Get All Product
     public Page<Product> getAllProduct(Optional<Integer> page, Optional<String> sortBy) {
-        return (Page<Product>) this.productRepository.findAll( PageRequest.of(page.orElse(0), 2, Sort.Direction.ASC, sortBy.orElse("productId")));
+        return (Page<Product>) this.productRepository.findAll(PageRequest.of(page.orElse(0), 2, Sort.Direction.ASC, sortBy.orElse("productId")));
     }
 
     // Get Product By ID

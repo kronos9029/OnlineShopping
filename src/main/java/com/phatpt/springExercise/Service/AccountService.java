@@ -2,6 +2,8 @@ package com.phatpt.springExercise.Service;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import com.phatpt.springExercise.Entity.Account;
 import com.phatpt.springExercise.Repository.AccountRepository;
 
@@ -28,7 +30,8 @@ public class AccountService {
         }
     }
 
-    public Optional<Account> findAccountByUsername(String username){
+    public Optional<Account> findAccountByUsername(HttpSession session){
+        String username = (String) session.getAttribute("currentUsername");
         return this.accountRepository.findByUsername(username);
     }
 

@@ -53,12 +53,12 @@ public class ProductTestService {
         list.add(product3);
     }
 
-    // @Test
-    // public void getAllTest_returnProductList() throws Exception {
-    //     when(productRepository.findAll()).thenReturn(list);
-    //     assertEquals(productService.getAllProduct(), list);
-    //     verify(productRepository, times(1)).findAll();
-    // }
+    @Test
+    public void getAllTest_returnProductList() throws Exception {
+        when(productRepository.findAll()).thenReturn(list);
+        assertEquals(productService.getAllProduct(null, null), list);
+        verify(productRepository, times(1)).findAll();
+    }
 
     @Test
     public void whenValidID_thenProductShouldBeFound() throws Exception {
