@@ -116,4 +116,12 @@ public class ProductService {
         session.removeAttribute("shoppingCart");
         return shoppingCart;
     }
+
+    public List<Product> findProductByName(String name) throws Exception{
+        List<Product> productList =  productRepository.findByproductNameContainingIgnoreCase(name);
+        if(productList.isEmpty()){
+            throw new Exception("Product Not Found!!");
+        }
+        return productList;
+    }
 }

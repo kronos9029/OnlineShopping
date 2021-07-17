@@ -33,40 +33,34 @@ public class ProductController {
         this.productService = productService;
     }
 
-    //Get All Product
     @GetMapping("")
     public Page<Product> getAllProduct(@RequestParam("page") Optional<Integer> page,  @RequestParam("sortBy")Optional<String> sortBy){
         return (Page<Product>) productService.getAllProduct(page, sortBy);
     }
 
-    //Get Product By ID
     @GetMapping("/{productId}")
     public ResponseEntity<Product> getProductById(@PathVariable(value = "productId") Long productId) {
         return productService.getProductById(productId);
     }
 
-    //Save Product
     @PostMapping("")
     public Product createProduct(@RequestBody Product newProduct, @RequestParam("cateId") long cateId) throws Exception{
         return productService.createProduct(newProduct, cateId);
     }
 
-    //Update Product
     @PutMapping("")
     public ResponseEntity<Product> updateProduct(@RequestBody Product productDetail, @RequestParam(value = "id") Long productId){
         return productService.updateProduct(productDetail, productId);
     }
     
-    //Delete Product
     @DeleteMapping("/{productId}")
     public Map<String, Boolean> deleteProduct(@PathVariable(value = "productId") Long productId){
         return productService.deleteProduct(productId);
     }
     
-    //Find All Product By CateID
     @GetMapping("/ByCate")
     @ResponseBody
-    public List<Product> findAlProductsByCateId(@RequestParam("cateId") String cateId){
+    public List<Product> getAllProductsByCateId(@RequestParam("cateId") String cateId){
         List<Product> productList = new ArrayList<>();
         try {
             long id = Long.parseLong(cateId);
@@ -75,5 +69,10 @@ public class ProductController {
             e.getMessage();
         }
         return productList;
+    }
+
+    @GetMapping("/ByName")
+    public List<Product> getProductByName(@RequestParam("productName") String productName) throws Exception{
+        return productService.findProductByName(productName);
     }
 }

@@ -28,34 +28,29 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    // Get All Category
     @GetMapping("/")
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
-    // Get Cate By ID
     @GetMapping("/{cateId}")
     public ResponseEntity<Category> getProductById(@PathVariable(value = "cateId") Long cateId) {
         return categoryService.getProductById(cateId);
     }
 
-    // Save Cate
     @PostMapping("/")
     public Category createCate(@RequestBody Category newCate) {
         return categoryService.createCate(newCate);
     }
 
-    // Update Cate
-    @PutMapping("/{id}")
+    @PutMapping("/{cateId}")
     public ResponseEntity<Category> updateCategory(@RequestBody Category cateDetail,
-            @PathVariable(value = "id") Long cateId) {
+            @PathVariable(value = "cateId") Long cateId) {
         return categoryService.updateCategory(cateDetail, cateId);
     }
 
-    // Delete Product
-    @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteCate(@PathVariable(value = "id") Long cateId) {
+    @DeleteMapping("/{cateId}")
+    public Map<String, Boolean> deleteCate(@PathVariable(value = "cateId") Long cateId) {
         return categoryService.deleteCate(cateId);
     }
 

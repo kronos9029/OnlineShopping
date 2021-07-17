@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,17 +22,17 @@ public class OrderDetailController {
     private final OrderDetailService orderDetailService;
 
     @Autowired
-    public OrderDetailController(com.phatpt.springExercise.Service.OrderDetailService orderDetailService) {
+    public OrderDetailController(OrderDetailService orderDetailService) {
         this.orderDetailService = orderDetailService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<OrderDetail> getAllOrderDetail(){
         return this.orderDetailService.getAllOrderDetail();
     }
 
-    @GetMapping("/orderId?{orderId}")
-    public List<OrderDetail> getDetailByOrderId(@RequestParam("orderId") Long orderId){
+    @GetMapping("/{orderId}")
+    public List<OrderDetail> getDetailByOrderId(@PathVariable("orderId") Long orderId){
         return this.orderDetailService.getDetailByOrderId(orderId);
     }
 

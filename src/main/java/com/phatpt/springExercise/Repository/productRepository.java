@@ -24,4 +24,9 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
     @Modifying
     @Query("UPDATE Product SET quantity = ?1 WHERE product_id = ?2")
     int updateQuantity(int newQuantity, long productId);
+
+    // @Query("FROM Product WHERE product_name LIKE CONCAT('%',:productName,'%')")
+    // List<Product> findByproductNameContainingIgnoreCase(String name);
+
+    List<Product> findByproductNameContainingIgnoreCase(String name);
 }
