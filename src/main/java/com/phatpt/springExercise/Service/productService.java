@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,9 @@ import com.phatpt.springExercise.Repository.CategoryRepository;
 import com.phatpt.springExercise.Repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +36,8 @@ public class ProductService {
     }
 
     // Get All Product
-    public List<Product> getAllProduct() {
-        return (List<Product>) this.productRepository.findAll();
+    public Page<Product> getAllProduct(Optional<Integer> page, Optional<String> sortBy) {
+        return (Page<Product>) this.productRepository.findAll( PageRequest.of(page.orElse(0), 2, Sort.Direction.ASC, sortBy.orElse("productId")));
     }
 
     // Get Product By ID

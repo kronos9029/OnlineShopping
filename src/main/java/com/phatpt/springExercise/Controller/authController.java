@@ -30,16 +30,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody loginRequest request, HttpServletRequest seRequest){
         return authService.authenticateUser(request, seRequest);
+        
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody registerRequest request){
         return authService.registerUser(request);
     }
-
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request){
-        return authService.logout(request);
-    }
-    
 }

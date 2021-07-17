@@ -3,11 +3,13 @@ package com.phatpt.springExercise.Controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.phatpt.springExercise.Entity.Product;
 import com.phatpt.springExercise.Service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +34,9 @@ public class ProductController {
     }
 
     //Get All Product
-    @GetMapping("/")
-    public List<Product> getAllProduct(){
-        return (List<Product>) productService.getAllProduct();
+    @GetMapping("")
+    public Page<Product> getAllProduct(@RequestParam("page") Optional<Integer> page,  @RequestParam("sortBy")Optional<String> sortBy){
+        return (Page<Product>) productService.getAllProduct(page, sortBy);
     }
 
     //Get Product By ID
@@ -62,7 +64,7 @@ public class ProductController {
     }
     
     //Find All Product By CateID
-    @GetMapping("")
+    @GetMapping("/ByCate")
     @ResponseBody
     public List<Product> findAlProductsByCateId(@RequestParam("cateId") String cateId){
         List<Product> productList = new ArrayList<>();

@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.phatpt.springExercise.Entity.Account;
 import com.phatpt.springExercise.Entity.Role;
@@ -122,12 +121,6 @@ public class AuthService {
         accountRepository.save(account);
 
         return ResponseEntity.ok(new messageResponse("User registered successfully!"));
-    }
-
-    public ResponseEntity<?> logout(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        session.invalidate();
-        return ResponseEntity.ok(new messageResponse("User Logged Out!!"));
     }
     
 }
