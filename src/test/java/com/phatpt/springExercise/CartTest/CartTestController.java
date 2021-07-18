@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.phatpt.springExercise.SpringExerciseApplication;
-import com.phatpt.springExercise.Controller.ShoppingCartController;
+// import com.phatpt.springExercise.Controller.ShoppingCartController;
 import com.phatpt.springExercise.Entity.ShoppingCart;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+// import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -33,22 +33,22 @@ public class CartTestController {
         return "http://localhost:" + port;
     }
 
-    @Test
-    public void testAddProduct_ThrowNOtFound() {
-         Long id = 2L;
-       ShoppingCart addProducCart = restTemplate.getForObject(getRootUrl() + "/cart/" + id, 
-       ShoppingCart.class);
+//     @Test
+//     public void testAddProduct_ThrowNOtFound() {
+//          Long id = 2L;
+//        ShoppingCart addProducCart = restTemplate.getForObject(getRootUrl() + "/cart/" + id, 
+//        ShoppingCart.class);
         
-       ResponseEntity<ShoppingCart> postResponse = restTemplate.postForEntity(getRootUrl() 
-       + "/public/cart/", addProducCart, ShoppingCart.class);
-         try {
-           addProducCart = restTemplate.getForObject(getRootUrl() + "/cart/" + id, ShoppingCartController.class);
-           assertNotNull(postResponse);
-           assertNotNull(postResponse.getBody()); 
-       } catch (final HttpClientErrorException e) {
-              assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
-         }
-    }
+//        ResponseEntity<ShoppingCart> postResponse = restTemplate.postForEntity(getRootUrl() 
+//        + "/public/cart/", addProducCart, ShoppingCart.class);
+//          try {
+//            addProducCart = restTemplate.getForObject(getRootUrl() + "/cart/" + id, ShoppingCartController.class);
+//            assertNotNull(postResponse);
+//            assertNotNull(postResponse.getBody()); 
+//        } catch (final HttpClientErrorException e) {
+//               assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
+//          }
+//     }
  
    @Test
    public void testDeleteProduct_ThrowNOtFound() {
