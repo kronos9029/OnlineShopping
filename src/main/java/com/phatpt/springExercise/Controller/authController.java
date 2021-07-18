@@ -1,6 +1,7 @@
 package com.phatpt.springExercise.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.phatpt.springExercise.Service.AuthService;
@@ -37,4 +38,10 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody registerRequest request){
         return authService.registerUser(request);
     }
+
+    @PostMapping("/deleteSession")
+    public void deleteSession(HttpSession session){
+         authService.deleteSession(session);
+    }
+    
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.phatpt.springExercise.Entity.Account;
 import com.phatpt.springExercise.Entity.Role;
@@ -123,4 +124,8 @@ public class AuthService {
         return ResponseEntity.ok(new messageResponse("User registered successfully!"));
     }
     
+    public void deleteSession(HttpSession session){
+        session.invalidate();
+    }
+
 }
