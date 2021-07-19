@@ -1,8 +1,7 @@
 package com.phatpt.springExercise.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import com.phatpt.springExercise.Entity.Category;
 import com.phatpt.springExercise.Entity.Product;
@@ -10,7 +9,6 @@ import com.phatpt.springExercise.Exception.CategoryNotFoundException;
 import com.phatpt.springExercise.Repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,31 +31,31 @@ public class CategoryService {
     }
 
     // Get Cate By ID
-    public ResponseEntity<Category> getProductById(Long cateId) throws CategoryNotFoundException {
-        Category category = categoryRepository.findById(cateId)
-                .orElseThrow(() -> new CategoryNotFoundException(cateId));
+    public Optional<Category> getCateById(Long cateId) throws CategoryNotFoundException {
+        Optional<Category> category = categoryRepository.findById(cateId);
 
-        return ResponseEntity.ok().body(category);
+        return category;
     }
 
     // Save Cate
     public Category createCate(Category newCate) {
-        return this.categoryRepository.save(newCate);
+        return categoryRepository.save(newCate);
     }
 
     // Update Cate
-    public ResponseEntity<Category> updateCategory(Category cateDetail, Long cateId) {
+    public Category updateCategory(Category cateDetail, Long cateId) {
         Category category = categoryRepository.findById(cateId)
                 .orElseThrow(() -> new CategoryNotFoundException(cateId));
 
         category.setCateName(cateDetail.getCateName());
         category.setCateDescription(cateDetail.getCateDescription());
 
-        return ResponseEntity.ok(this.categoryRepository.save(category));
+        return categoryRepository.save(category);
+
     }
 
     // Delete Product
-    public Map<String, Boolean> deleteCate(Long cateId) {
+    public Boolean deleteCate(Long cateId) {
         Category category = categoryRepository.findById(cateId)
                 .orElseThrow(() -> new CategoryNotFoundException(cateId));
 
@@ -69,10 +67,7 @@ public class CategoryService {
         }
         this.categoryRepository.delete(category);
 
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("Deleted", Boolean.TRUE);
-
-        return response;
+        return Boolean.TRUE;
     }
 
 }
