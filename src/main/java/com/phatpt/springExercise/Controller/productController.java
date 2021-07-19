@@ -29,10 +29,10 @@ public class ProductController {
 
     private final ProductService productService;
 
-    private Response responseObj;
+    private Response responseObj = new Response();
 
     @Autowired
-    public ProductController(com.phatpt.springExercise.Service.ProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
