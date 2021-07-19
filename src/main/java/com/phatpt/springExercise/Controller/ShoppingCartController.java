@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
 
-    private Response responseObj;
+    private Response responseObj = new Response();
     
     @Autowired
     public ShoppingCartController(ShoppingCartService shoppingCartService) {

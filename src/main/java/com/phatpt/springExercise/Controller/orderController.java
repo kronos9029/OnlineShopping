@@ -30,7 +30,7 @@ public class OrderController {
 
     private final ProductService productService;
 
-    private Response responseObj;
+    private Response responseObj = new Response();
 
     @Autowired
         public OrderController(OrderService orderService, ProductService productService) {

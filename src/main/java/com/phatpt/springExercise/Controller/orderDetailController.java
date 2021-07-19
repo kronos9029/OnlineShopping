@@ -26,7 +26,7 @@ public class OrderDetailController {
 
     private final OrderDetailService orderDetailService;
 
-    private Response responseObj;
+    private Response responseObj = new Response();
     
     @Autowired
     public OrderDetailController(OrderDetailService orderDetailService) {
