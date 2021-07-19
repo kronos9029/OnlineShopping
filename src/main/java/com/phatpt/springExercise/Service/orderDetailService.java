@@ -1,9 +1,7 @@
 package com.phatpt.springExercise.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,15 +38,12 @@ public class OrderDetailService {
         return (List<OrderDetail>) this.orderDetailRepository.findDetailByOrderId(orderId);
     }
 
-    public Map<String, Boolean> deleteOrderDetailById(long detailId){
+    public Boolean deleteOrderDetailById(long detailId){
         OrderDetail orderDetail = orderDetailRepository.findById(detailId)
                                                 .orElseThrow(() -> new OrderDetailNotFoundException(detailId));
         this.orderDetailRepository.delete(orderDetail);
 
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("Deleted", Boolean.TRUE);
-
-        return response;
+        return Boolean.TRUE;
     }
 
     public List<OrderDetail> createOrderDetail(Order newOrder, HttpSession session) throws Exception{

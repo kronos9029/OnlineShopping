@@ -1,10 +1,8 @@
 package com.phatpt.springExercise.Service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -86,7 +84,7 @@ public class OrderService {
         return newOrder;
     }
 
-    public Map<String, Boolean> deleteOrder(Long orderId) {
+    public Boolean deleteOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(orderId));
         List<OrderDetail> detailList = this.orderDetailService.getDetailByOrderId(order.getOrderId());
         if (detailList.size() != 0) {
@@ -96,10 +94,7 @@ public class OrderService {
         }
         this.orderRepository.delete(order);
 
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("Deleted", Boolean.TRUE);
-
-        return response;
+        return Boolean.TRUE;
     }
 
     public List<Order> getOrdersByUserId(Long userId) {
