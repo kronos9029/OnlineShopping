@@ -28,7 +28,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    private Response responseObj;
+    private Response responseObj = new Response();
 
     @Autowired
     public CategoryController(CategoryService categoryService) {

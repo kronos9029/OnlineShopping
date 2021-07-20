@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
     private final AccountService accountService;
 
-    private Response responseObj;
+    private Response responseObj = new Response();
 
     @Autowired
     public AccountController(AccountService accountService) {
