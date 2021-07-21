@@ -56,7 +56,7 @@ public class ProductTestService {
     @Test
     public void getAllTest_returnProductList() throws Exception {
         when(productRepository.findAll()).thenReturn(list);
-        assertEquals(productService.getAllProduct(null, null), list);
+        assertEquals(productService.getAllProduct(), list);
         verify(productRepository, times(1)).findAll();
     }
 

@@ -26,11 +26,6 @@ public class OrderController {
 
     private final ProductService productService;
 
-<<<<<<< HEAD:src/main/java/com/phatpt/springExercise/Controller/OrderController.java
-    private Response responseObj = new Response();
-
-=======
->>>>>>> parent of eadb109... Refactor controller code:src/main/java/com/phatpt/springExercise/Controller/orderController.java
     @Autowired
         public OrderController(OrderService orderService, ProductService productService) {
         this.orderService = orderService;

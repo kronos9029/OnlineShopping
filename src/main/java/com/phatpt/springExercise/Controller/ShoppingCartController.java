@@ -17,11 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
 
-<<<<<<< HEAD
-    private Response responseObj = new Response();
-    
-=======
->>>>>>> parent of eadb109... Refactor controller code
     @Autowired
     public ShoppingCartController(ShoppingCartService shoppingCartService) {
         this.shoppingCartService = shoppingCartService;
