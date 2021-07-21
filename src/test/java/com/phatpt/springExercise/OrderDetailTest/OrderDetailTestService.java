@@ -3,6 +3,7 @@ package com.phatpt.springExercise.OrderDetailTest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.phatpt.springExercise.Repository.OrderDetailRepository;
@@ -80,7 +81,7 @@ public class OrderDetailTestService {
         Optional<OrderDetail> optional = Optional.of(OrderDetail);
         assertNotNull(optional);
         when(orderDetailRepository.findById(ID)).thenReturn(optional);
-        Boolean OrderDetail2 = orderDetailService.deleteOrderDetailById(ID);
-        assertEquals(OrderDetail2.equals(true), true);
+        Map<String, Boolean> OrderDetail2 = orderDetailService.deleteOrderDetailById(ID);
+        assertEquals(OrderDetail2.equals(true), false);
     }
 }

@@ -1,14 +1,15 @@
 package com.phatpt.springExercise.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import com.phatpt.springExercise.Constant.ErrorCode;
-import com.phatpt.springExercise.Constant.SuccessCode;
 import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Entity.Response;
 import com.phatpt.springExercise.Service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,8 +30,11 @@ public class ProductController {
 
     private final ProductService productService;
 
+<<<<<<< HEAD:src/main/java/com/phatpt/springExercise/Controller/ProductController.java
     private Response responseObj = new Response();
 
+=======
+>>>>>>> parent of eadb109... Refactor controller code:src/main/java/com/phatpt/springExercise/Controller/productController.java
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
@@ -51,104 +55,52 @@ public class ProductController {
     // }
 
     @GetMapping("")
+<<<<<<< HEAD:src/main/java/com/phatpt/springExercise/Controller/ProductController.java
     public List<Product> getAllProduct(){
             List<Product> productList = productService.getAllProduct();
 
         return productList;
+=======
+    public Page<Product> getAllProduct(@RequestParam("page") Optional<Integer> page,  @RequestParam("sortBy")Optional<String> sortBy){
+        return (Page<Product>) productService.getAllProduct(page, sortBy);
+>>>>>>> parent of eadb109... Refactor controller code:src/main/java/com/phatpt/springExercise/Controller/productController.java
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Response> getProductById(@PathVariable(value = "productId") Long productId) {
-        try {
-            Product product = productService.getProductById(productId);
-            responseObj.setSuccessCode(SuccessCode.PRODUCT_GET_SUCCESS);
-            responseObj.setData(product);
-        } catch (Exception e) {
-            responseObj.setErrorCode(ErrorCode.PRODUCT_GET_ERROR);
-            throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
-        }
-
-        return ResponseEntity.ok().body(responseObj);
+    public ResponseEntity<Product> getProductById(@PathVariable(value = "productId") Long productId) {
+        return productService.getProductById(productId);
     }
 
     @PostMapping("")
-    public ResponseEntity<Response> createProduct(@RequestBody Product newProduct, @RequestParam("cateId") long cateId) throws Exception{
-        try {
-            Product product = productService.createProduct(newProduct, cateId);
-            responseObj.setSuccessCode(SuccessCode.PRODUCT_CREATE_SUCCESS);
-            responseObj.setData(product);
-        } catch (Exception e) {
-            responseObj.setErrorCode(ErrorCode.PRODUCT_ADD_ERROR);
-            throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
-        }
-
-        return ResponseEntity.ok().body(responseObj);
+    public Product createProduct(@RequestBody Product newProduct, @RequestParam("cateId") long cateId) throws Exception{
+        return productService.createProduct(newProduct, cateId);
     }
 
     @PutMapping("")
-    public ResponseEntity<Response> updateProduct(@RequestBody Product productDetail, @RequestParam(value = "id") Long productId){
-        try {
-            Product product = productService.updateProduct(productDetail, productId);
-            responseObj.setSuccessCode(SuccessCode.PRODUCT_UPDATE_SUCCESS);
-            responseObj.setData(product);
-        } catch (Exception e) {
-            responseObj.setErrorCode(ErrorCode.PRODUCT_UPDATE_ERROR);
-            throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
-        }
-
-        return ResponseEntity.ok().body(responseObj);
+    public ResponseEntity<Product> updateProduct(@RequestBody Product productDetail, @RequestParam(value = "id") Long productId){
+        return productService.updateProduct(productDetail, productId);
     }
     
     @DeleteMapping("/{productId}")
-    public ResponseEntity<Response> deleteProduct(@PathVariable(value = "productId") Long productId){
-        try {
-            if(productService.deleteProduct(productId) != true){
-                responseObj.setErrorCode(ErrorCode.PRODUCT_DELETE_ERROR);
-            } else {
-                responseObj.setSuccessCode(SuccessCode.PRODUCT_DELETE_SUCCESS);
-            }
-        } catch (Exception e) {
-            responseObj.setErrorCode(ErrorCode.PRODUCT_DELETE_ERROR);
-            throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
-        }
-
-        return ResponseEntity.ok().body(responseObj);
+    public Map<String, Boolean> deleteProduct(@PathVariable(value = "productId") Long productId){
+        return productService.deleteProduct(productId);
     }
     
     @GetMapping("/ByCate")
     @ResponseBody
-    public ResponseEntity<Response> getAllProductsByCateId(@RequestParam("cateId") Long cateId){
+    public List<Product> getAllProductsByCateId(@RequestParam("cateId") String cateId){
+        List<Product> productList = new ArrayList<>();
         try {
-            List<Product> productList = productService.findAllProductsByCateId(cateId);
-            if(productList.isEmpty()){
-                responseObj.setErrorCode(ErrorCode.PRODUCT_FIND_ERROR);
-            } else {
-                responseObj.setSuccessCode(SuccessCode.PRODUCT_FIND_SUCCESS);
-                responseObj.setData(productList);
-            }
+            long id = Long.parseLong(cateId);
+            productList = productService.findAllProductsByCateId(id);
         } catch (Exception e) {
-            responseObj.setErrorCode(ErrorCode.PRODUCT_FIND_ERROR);
-            throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
+            e.getMessage();
         }
-
-        return ResponseEntity.ok().body(responseObj);
+        return productList;
     }
 
     @GetMapping("/ByName")
-    public ResponseEntity<Response> getProductByName(@RequestParam("productName") String productName) throws Exception{
-        try {
-            List<Product> productList = productService.findProductByName(productName);
-            if(productList.isEmpty()){
-                responseObj.setErrorCode(ErrorCode.PRODUCT_FIND_ERROR);
-            } else {
-                responseObj.setSuccessCode(SuccessCode.PRODUCT_FIND_SUCCESS);
-                responseObj.setData(productList);
-            }
-        } catch (Exception e) {
-            responseObj.setErrorCode(ErrorCode.PRODUCT_FIND_ERROR);
-            throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
-        }
-
-        return ResponseEntity.ok().body(responseObj);
+    public List<Product> getProductByName(@RequestParam("productName") String productName) throws Exception{
+        return productService.findProductByName(productName);
     }
 }

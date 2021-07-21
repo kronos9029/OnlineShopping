@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,10 @@ import com.phatpt.springExercise.Repository.CategoryRepository;
 import com.phatpt.springExercise.Repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,16 +36,16 @@ public class ProductService {
     }
 
     // Get All Product
-    public List<Product> getAllProduct() {
-        return this.productRepository.findAll();
+    public Page<Product> getAllProduct(Optional<Integer> page, Optional<String> sortBy) {
+        return (Page<Product>) this.productRepository.findAll(PageRequest.of(page.orElse(0), 2, Sort.Direction.ASC, sortBy.orElse("productId")));
     }
 
     // Get Product By ID
-    public Product getProductById(Long productId) throws ProductNotFoundException {
+    public ResponseEntity<Product> getProductById(Long productId) throws ProductNotFoundException {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
 
-        return product;
+        return ResponseEntity.ok().body(product);
     }
 
     public Product createProduct(Product newProduct, long cateId) throws Exception {
@@ -56,7 +61,7 @@ public class ProductService {
     }
 
     // Update Product
-    public Product updateProduct(Product productDetail, Long productId) {
+    public ResponseEntity<Product> updateProduct(Product productDetail, Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
 
@@ -68,16 +73,19 @@ public class ProductService {
         product.setUpdateDate(currentDate);
         product.setCartQuantity(0);
 
-        return product;
+        return ResponseEntity.ok(this.productRepository.save(product));
     }
 
     // Delete Product
-    public Boolean deleteProduct(Long productId) {
+    public Map<String, Boolean> deleteProduct(Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
         this.productRepository.delete(product);
 
-        return Boolean.TRUE;
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("Deleted", Boolean.TRUE);
+
+        return response;
     }
 
     public List<Product> findAllProductsByCateId(long cateId) {
@@ -92,7 +100,7 @@ public class ProductService {
         return response;
     }
 
-    public boolean updateQuantity(HttpSession session) throws Exception {
+    public ShoppingCart updateQuantity(HttpSession session) throws Exception {
         ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
         if (shoppingCart == null) {
             throw new Exception("Cart Empty!!");
@@ -106,8 +114,7 @@ public class ProductService {
             this.productRepository.updateQuantity(remain, cartProduct.getProductId());
         }
         session.removeAttribute("shoppingCart");
-
-        return Boolean.TRUE;
+        return shoppingCart;
     }
 
     public List<Product> findProductByName(String name) throws Exception{

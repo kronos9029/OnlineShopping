@@ -2,6 +2,7 @@ package com.phatpt.springExercise.CategoryTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.phatpt.springExercise.Entity.Category;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.ResponseEntity;
 
 @SpringBootTest
 public class CateTestService {
@@ -60,8 +62,8 @@ public class CateTestService {
         Optional<Category> optional = Optional.of(cate);
         assertNotNull(optional);
         when(categoryRepository.findById(CateID)).thenReturn(optional);
-        Optional<Category> cate2 = categoryService.getCateById(CateID);
-        assertEquals(cate2.get().getCateName(), cate.getCateName());
+        ResponseEntity<Category> cate2 = categoryService.getProductById(CateID);
+        assertEquals(cate2.getBody().getCateName(), cate.getCateName());
     }
     @Test
     public void saveCate() throws Exception {
@@ -77,8 +79,8 @@ public class CateTestService {
         assertNotNull(optional);
         when(categoryRepository.findById(CateID)).thenReturn(optional);
         when(categoryRepository.save(optional.get())).thenReturn(cate);
-        Category cate2 = categoryService.updateCategory(cate, CateID);
-        assertEquals(cate2.getCateName(), cate.getCateName());
+        ResponseEntity<Category> cate2 = categoryService.updateCategory(cate, CateID);
+        assertEquals(cate2.getBody().getCateName(), cate.getCateName());
     }
 
     @Test
@@ -89,8 +91,8 @@ public class CateTestService {
         Optional<Category> optional = Optional.of(cate);
         assertNotNull(optional);
         when(categoryRepository.findById(CateID)).thenReturn(optional);
-        Boolean cate2 = categoryService.deleteCate(CateID);
-        assertEquals(cate2.equals(true), true);
+        Map<String, Boolean> cate2 = categoryService.deleteCate(CateID);
+        assertEquals(cate2.equals(true), false);
 
     }
 }

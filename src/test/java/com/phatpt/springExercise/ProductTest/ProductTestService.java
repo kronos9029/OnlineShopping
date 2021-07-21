@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.phatpt.springExercise.Entity.Category;
@@ -21,6 +22,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.ResponseEntity;
+
 @SpringBootTest
 public class ProductTestService {
     @Autowired
@@ -53,7 +56,7 @@ public class ProductTestService {
     @Test
     public void getAllTest_returnProductList() throws Exception {
         when(productRepository.findAll()).thenReturn(list);
-        assertEquals(productService.getAllProduct(), list);
+        assertEquals(productService.getAllProduct(null, null), list);
         verify(productRepository, times(1)).findAll();
     }
 
@@ -64,8 +67,8 @@ public class ProductTestService {
         Optional<Product> optional = Optional.of(product);
         assertNotNull(optional);
         when(productRepository.findById(PRODUCTID)).thenReturn(optional);
-        Product product2 = productService.getProductById(PRODUCTID);
-        assertEquals(product2.getProductName(), product.getProductName());
+        ResponseEntity<Product> product2 = productService.getProductById(PRODUCTID);
+        assertEquals(product2.getBody().getProductName(), product.getProductName());
     }
     @Test
     public void createProduct_ThenReturnProduct() throws Exception {
@@ -83,8 +86,8 @@ public class ProductTestService {
         assertNotNull(optional);
         when(productRepository.findById(PRODUCTID)).thenReturn(optional);
         when(productRepository.save(optional.get())).thenReturn(product);
-        Product product2 = productService.updateProduct(newProduct, PRODUCTID);
-        assertEquals(product2.getProductName(), newProduct.getProductName());
+        ResponseEntity<Product> product2 = productService.updateProduct(newProduct, PRODUCTID);
+        assertEquals(product2.getBody().getProductName(), newProduct.getProductName());
     }
 
     @Test
@@ -94,8 +97,8 @@ public class ProductTestService {
         Optional<Product> optional = Optional.of(Product);
         assertNotNull(optional);
         when(productRepository.findById(PRODUCTID)).thenReturn(optional);
-        Boolean product = productService.deleteProduct(PRODUCTID);
-        assertEquals(product.equals(true), true);
+        Map<String, Boolean> product = productService.deleteProduct(PRODUCTID);
+        assertEquals(product.equals(true), false);
     }
 
 }
