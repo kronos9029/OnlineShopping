@@ -36,18 +36,25 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("")
-    public ResponseEntity<Response> getAllProduct(){
-        try {
-            List<Product> productList = productService.getAllProduct();
-            responseObj.setSuccessCode(SuccessCode.PRODUCT_GET_SUCCESS);
-            responseObj.setData(productList);
-        } catch (Exception e) {
-            responseObj.setErrorCode(ErrorCode.PRODUCT_GET_ERROR);
-            throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
-        }
+    // @GetMapping("")
+    // public ResponseEntity<Response> getAllProduct(){
+    //     try {
+    //         List<Product> productList = productService.getAllProduct();
+    //         responseObj.setSuccessCode(SuccessCode.PRODUCT_GET_SUCCESS);
+    //         responseObj.setData(productList);
+    //     } catch (Exception e) {
+    //         responseObj.setErrorCode(ErrorCode.PRODUCT_GET_ERROR);
+    //         throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
+    //     }
 
-        return ResponseEntity.ok().body(responseObj);
+    //     return ResponseEntity.ok().body(responseObj);
+    // }
+
+    @GetMapping("")
+    public List<Product> getAllProduct(){
+            List<Product> productList = productService.getAllProduct();
+
+        return productList;
     }
 
     @GetMapping("/{productId}")

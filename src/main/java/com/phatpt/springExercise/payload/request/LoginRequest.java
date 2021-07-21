@@ -2,14 +2,14 @@ package com.phatpt.springExercise.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
-public class loginRequest {
+public class LoginRequest {
     @NotBlank
     private String username;
 
     @NotBlank
     private String password;
 
-    public loginRequest() {
+    public LoginRequest() {
     }
 
     public String getUsername() {

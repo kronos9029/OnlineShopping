@@ -2,7 +2,7 @@ package com.phatpt.springExercise.payload.response;
 
 import java.util.List;
 
-public class jwtResponse {
+public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private Long id;
@@ -10,7 +10,7 @@ public class jwtResponse {
     private String email;
     private List<String> roles;
     
-    public jwtResponse(String token, Long id, String username, String email, List<String> roles) {
+    public JwtResponse(String token, Long id, String username, String email, List<String> roles) {
         this.token = token;
         this.id = id;
         this.username = username;

@@ -16,10 +16,10 @@ import com.phatpt.springExercise.Repository.AccountRepository;
 import com.phatpt.springExercise.Repository.RoleRepository;
 import com.phatpt.springExercise.Security.Service.AccountDetailImpl;
 import com.phatpt.springExercise.Security.jwt.JwtUtils;
-import com.phatpt.springExercise.payload.request.loginRequest;
-import com.phatpt.springExercise.payload.request.registerRequest;
-import com.phatpt.springExercise.payload.response.jwtResponse;
-import com.phatpt.springExercise.payload.response.messageResponse;
+import com.phatpt.springExercise.payload.request.LoginRequest;
+import com.phatpt.springExercise.payload.request.RegisterRequest;
+import com.phatpt.springExercise.payload.response.JwtResponse;
+import com.phatpt.springExercise.payload.response.MessageResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -49,7 +49,7 @@ public class AuthService {
         this.jwtUtils = jwtUtils;
     }
 
-    public ResponseEntity<?> authenticateUser(loginRequest request, HttpServletRequest seRequest) {
+    public ResponseEntity<?> authenticateUser(LoginRequest request, HttpServletRequest seRequest) {
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
@@ -66,24 +66,24 @@ public class AuthService {
         
         
         seRequest.getSession().setAttribute("currentUsername", request.getUsername());
-        return ResponseEntity.ok(new jwtResponse(jwt,
+        return ResponseEntity.ok(new JwtResponse(jwt,
                                                  userDetails.getId(),
                                                  userDetails.getUsername(),
                                                  userDetails.getEmail(),
                                                  roles));
     }
 
-    public ResponseEntity<?> registerUser(registerRequest request) {
+    public ResponseEntity<?> registerUser(RegisterRequest request) {
         if (accountRepository.existsByUsername(request.getUsername())) {
             return ResponseEntity
                 .badRequest()
-                .body(new messageResponse("Error: Username is already taken!"));
+                .body(new MessageResponse("Error: Username is already taken!"));
         }
 
         if (accountRepository.existsByEmail(request.getEmail())) {
             return ResponseEntity
                 .badRequest()
-                .body(new messageResponse("Error: Email is already in use!"));
+                .body(new MessageResponse("Error: Email is already in use!"));
         }
 
         Account account = new Account(request.getUsername(), 
@@ -121,7 +121,7 @@ public class AuthService {
         account.setRole(roles);
         accountRepository.save(account);
 
-        return ResponseEntity.ok(new messageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
     
     public void deleteSession(HttpSession session){

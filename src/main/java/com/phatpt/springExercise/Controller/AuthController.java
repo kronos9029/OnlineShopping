@@ -5,8 +5,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.phatpt.springExercise.Service.AuthService;
-import com.phatpt.springExercise.payload.request.loginRequest;
-import com.phatpt.springExercise.payload.request.registerRequest;
+import com.phatpt.springExercise.payload.request.LoginRequest;
+import com.phatpt.springExercise.payload.request.RegisterRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +29,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody loginRequest request, HttpServletRequest seRequest){
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest request, HttpServletRequest seRequest){
         return authService.authenticateUser(request, seRequest);
         
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody registerRequest request){
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest request){
         return authService.registerUser(request);
     }
 

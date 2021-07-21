@@ -1,9 +1,9 @@
 package com.phatpt.springExercise.payload.response;
 
-public class messageResponse {
+public class MessageResponse {
     private String message;
 
-    public messageResponse(String message) {
+    public MessageResponse(String message) {
         this.message = message;
     }
 
