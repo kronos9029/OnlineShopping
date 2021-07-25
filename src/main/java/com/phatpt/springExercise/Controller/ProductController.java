@@ -33,10 +33,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("")
+    @GetMapping("/admin")
     public List<Product> getAllProduct(){
             List<Product> productList = productService.getAllProduct();
         return productList;
+    }
+
+    @GetMapping("/customer")
+    public List<Product> getAllActiveProduct(){
+        return this.productService.getAllActiveProduct();
     }
 
     @GetMapping("/{productId}")
@@ -49,8 +54,8 @@ public class ProductController {
         return productService.createProduct(newProduct, cateId);
     }
 
-    @PutMapping("")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product productDetail, @RequestParam(value = "id") Long productId){
+    @PutMapping("/{productId}")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product productDetail, @PathVariable(value = "productId") Long productId){
         return productService.updateProduct(productDetail, productId);
     }
     

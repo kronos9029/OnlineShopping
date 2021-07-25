@@ -52,6 +52,14 @@ public class OrderStatus implements Serializable{
         this.name = name;
     }
 
+    public StatusName getName() {
+        return name;
+    }
+
+    public void setName(StatusName name) {
+        this.name = name;
+    }
+
     @Override
 	public int hashCode() {
 		return Objects.hash(statusId);

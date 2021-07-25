@@ -36,6 +36,10 @@ public class ProductService {
         return (List<Product>) this.productRepository.findAll();
     }
 
+    public List<Product> getAllActiveProduct(){
+        return this.productRepository.findActiveProduct();
+    }
+
     // Get Product By ID
     public ResponseEntity<Product> getProductById(Long productId) throws ProductNotFoundException {
         Product product = productRepository.findById(productId)
@@ -52,6 +56,7 @@ public class ProductService {
         newProduct.setCreateDate(currentDate);
         newProduct.setCategory(category);
         newProduct.setCartQuantity(0);
+        newProduct.setStatus("ACTIVE");
         return this.productRepository.save(newProduct);
 
     }

@@ -29,6 +29,9 @@ public interface ProductRepository extends CrudRepository<Product, Long>{
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Product WHERE product_id = ?1")
+    @Query("UPDATE Product SET status = 'INACTIVE' WHERE product_id = ?1")
     void deleteProduct(Long productId);
+
+    @Query("FROM Product WHERE status = 'ACTIVE'")
+    List<Product> findActiveProduct();
 }

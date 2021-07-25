@@ -3,7 +3,6 @@ package com.phatpt.springExercise.Entity;
 import java.io.Serializable;
 import java.util.Date;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,6 +37,9 @@ public class Product implements Serializable{
     @Column(name = "image")
     @NotBlank
     private String image;
+
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "create_date")
     private Date createDate;
@@ -153,6 +155,14 @@ public class Product implements Serializable{
 
     public void setCartQuantity(int cartQuantity) {
         this.cartQuantity = cartQuantity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
