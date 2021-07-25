@@ -52,9 +52,9 @@ public class CategoryControllerTest{
     // @WithMockUser(username ="ROLE_CUSTOMER")
     public void getAllTest() throws Exception {
         this.categories = new ArrayList<>();
-        this.categories.add(new Category(1,"PC2", "ok"));
-        this.categories.add(new Category(2,"PC3", "ok"));
-        this.categories.add(new Category(3,"PC4", "ok"));
+        this.categories.add(new Category("PC2", "ok"));
+        this.categories.add(new Category("PC3", "ok"));
+        this.categories.add(new Category("PC4", "ok"));
         System.out.println(categories);
         Mockito.when(categoryService.getAllCategories()).thenReturn(categories);
         this.mockMvc.perform(get("/categories/")).andExpect(status().isOk()).andReturn();

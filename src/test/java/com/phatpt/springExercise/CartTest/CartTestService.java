@@ -40,7 +40,7 @@ public class CartTestService {
     @BeforeEach
     public void setUp(){
         list = new ArrayList<>();
-        Category category = new Category(1L, "Laptop", "strong laptop");
+        Category category = new Category("Laptop", "strong laptop");
         Product product = new Product("MSI RF", 17000000, "abcd.img", new Date(), new Date(), "productDescription", category, 100);
         Product product2 = new Product("MSI RG", 17000000, "abcd.img", new Date(), new Date(), "productDescription", category, 100);
         Product product3 = new Product("LENOVO LEGION", 17000000, "abcd.img", new Date(), new Date(), "productDescription", category, 100);

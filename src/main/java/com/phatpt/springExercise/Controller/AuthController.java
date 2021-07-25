@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.phatpt.springExercise.Service.AuthService;
+import com.phatpt.springExercise.Validate.Validate;
 import com.phatpt.springExercise.payload.request.LoginRequest;
 import com.phatpt.springExercise.payload.request.RegisterRequest;
 
@@ -30,6 +31,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest request, HttpServletRequest seRequest){
+        Validate.validateLogin(request);
         return authService.authenticateUser(request, seRequest);
         
     }

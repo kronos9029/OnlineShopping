@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,12 +27,13 @@ public class Category implements Serializable{
     private long cateId;
     
     @Column(name = "cate_name")
+    @NotBlank
     private String cateName;
     
     @Column(name = "cate_description")
+    @NotBlank
     private String cateDescription;
 
-    @Transient
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products = new ArrayList<>();
@@ -42,12 +43,6 @@ public class Category implements Serializable{
     }
 
     public Category(String cateName, String cateDescription) {
-        this.cateName = cateName;
-        this.cateDescription = cateDescription;
-    }
-
-    public Category(long cateId, String cateName, String cateDescription) {
-        this.cateId = cateId;
         this.cateName = cateName;
         this.cateDescription = cateDescription;
     }

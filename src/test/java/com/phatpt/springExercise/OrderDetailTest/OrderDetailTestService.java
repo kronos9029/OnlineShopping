@@ -42,7 +42,7 @@ public class OrderDetailTestService {
     @BeforeEach
     public void setUpOrderDetail() {
         list = new ArrayList<>();
-        Category category = new Category(1L, "PC1", "ok");
+        Category category = new Category("PC1", "ok");
         Order order = new Order(123, "customerName", "0941299811", "sky9", new Date());
         Product product = new Product("LENOVO LEGION", 17000000, "abcd.img", new Date(), new Date(), "productDescription", category, 100);
         OrderDetail orderDetail1 = new OrderDetail("feedback", 5, order, product);

@@ -33,7 +33,7 @@ public class ProductService {
 
     // Get All Product
     public List<Product> getAllProduct() {
-        return this.productRepository.findAll();
+        return (List<Product>) this.productRepository.findAll();
     }
 
     // Get Product By ID
@@ -73,10 +73,13 @@ public class ProductService {
     }
 
     // Delete Product
-    public Map<String, Boolean> deleteProduct(Long productId) {
+    public Map<String, Boolean> deleteProduct(Long productId) throws Exception {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
-        this.productRepository.delete(product);
+        if(product == null){
+            throw new Exception("ERROR AT Delete Controller");
+        }
+        this.productRepository.deleteProduct(productId);
 
         Map<String, Boolean> response = new HashMap<>();
         response.put("Deleted", Boolean.TRUE);

@@ -3,13 +3,11 @@ package com.phatpt.springExercise.Controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import com.phatpt.springExercise.Entity.Product;
 import com.phatpt.springExercise.Service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,40 +28,15 @@ public class ProductController {
 
     private final ProductService productService;
 
-<<<<<<< HEAD:src/main/java/com/phatpt/springExercise/Controller/ProductController.java
-    private Response responseObj = new Response();
-
-=======
->>>>>>> parent of eadb109... Refactor controller code:src/main/java/com/phatpt/springExercise/Controller/productController.java
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    // @GetMapping("")
-    // public ResponseEntity<Response> getAllProduct(){
-    //     try {
-    //         List<Product> productList = productService.getAllProduct();
-    //         responseObj.setSuccessCode(SuccessCode.PRODUCT_GET_SUCCESS);
-    //         responseObj.setData(productList);
-    //     } catch (Exception e) {
-    //         responseObj.setErrorCode(ErrorCode.PRODUCT_GET_ERROR);
-    //         throw new RuntimeException("ERROR AT ProductController: "+ e.getMessage());
-    //     }
-
-    //     return ResponseEntity.ok().body(responseObj);
-    // }
-
     @GetMapping("")
-<<<<<<< HEAD:src/main/java/com/phatpt/springExercise/Controller/ProductController.java
     public List<Product> getAllProduct(){
             List<Product> productList = productService.getAllProduct();
-
         return productList;
-=======
-    public Page<Product> getAllProduct(@RequestParam("page") Optional<Integer> page,  @RequestParam("sortBy")Optional<String> sortBy){
-        return (Page<Product>) productService.getAllProduct(page, sortBy);
->>>>>>> parent of eadb109... Refactor controller code:src/main/java/com/phatpt/springExercise/Controller/productController.java
     }
 
     @GetMapping("/{productId}")
@@ -82,7 +55,7 @@ public class ProductController {
     }
     
     @DeleteMapping("/{productId}")
-    public Map<String, Boolean> deleteProduct(@PathVariable(value = "productId") Long productId){
+    public Map<String, Boolean> deleteProduct(@PathVariable(value = "productId") Long productId) throws Exception{
         return productService.deleteProduct(productId);
     }
     

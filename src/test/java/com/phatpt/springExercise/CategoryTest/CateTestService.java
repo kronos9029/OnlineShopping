@@ -39,9 +39,9 @@ public class CateTestService {
     @BeforeEach
     public void setUp() {
         list = new ArrayList<>();
-        Category cate1 = new Category(1L, "PC1", "ok");
-        Category cate2 = new Category(2L, "PC2", "ok");
-        Category cate3 = new Category(3L, "PC2", "ok");
+        Category cate1 = new Category("PC1", "ok");
+        Category cate2 = new Category("PC2", "ok");
+        Category cate3 = new Category( "PC2", "ok");
         list.add(cate1);
         list.add(cate2);
         list.add(cate3);

@@ -8,6 +8,7 @@ import com.phatpt.springExercise.Service.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/categories")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -28,7 +30,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
@@ -38,7 +40,7 @@ public class CategoryController {
         return categoryService.getProductById(cateId);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public Category createCate(@RequestBody Category newCate) {
         return categoryService.createCate(newCate);
     }
