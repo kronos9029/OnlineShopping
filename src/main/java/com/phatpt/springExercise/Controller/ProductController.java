@@ -49,7 +49,7 @@ public class ProductController {
         return productService.getProductById(productId);
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     public Product createProduct(@RequestBody Product newProduct, @RequestParam("cateId") long cateId) throws Exception{
         return productService.createProduct(newProduct, cateId);
     }
@@ -64,7 +64,7 @@ public class ProductController {
         return productService.deleteProduct(productId);
     }
     
-    @GetMapping("/ByCate")
+    @GetMapping("/customer/ByCate")
     @ResponseBody
     public List<Product> getAllProductsByCateId(@RequestParam("cateId") String cateId){
         List<Product> productList = new ArrayList<>();
@@ -77,8 +77,13 @@ public class ProductController {
         return productList;
     }
 
-    @GetMapping("/ByName")
+    @GetMapping("/admin/ByName")
     public List<Product> getProductByName(@RequestParam("productName") String productName) throws Exception{
         return productService.findProductByName(productName);
+    }
+
+    @GetMapping("/customer/ByName")
+    public List<Product> getProductByNameCustomer(@RequestParam("productName") String productName) throws Exception{
+        return productService.findproductByNameCustomer(productName);
     }
 }

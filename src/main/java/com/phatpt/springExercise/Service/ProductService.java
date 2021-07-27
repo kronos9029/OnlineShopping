@@ -1,5 +1,6 @@
 package com.phatpt.springExercise.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +73,7 @@ public class ProductService {
         product.setImage(productDetail.getImage());
         product.setProductDescription(productDetail.getProductDescription());
         product.setUpdateDate(currentDate);
+        product.setStatus(productDetail.getStatus());
         product.setCartQuantity(0);
 
         return ResponseEntity.ok(this.productRepository.save(product));
@@ -127,5 +129,25 @@ public class ProductService {
             throw new Exception("Product Not Found!!");
         }
         return productList;
+    }
+
+    public List<Product> findproductByNameCustomer(String name) throws Exception{
+        List<Product> productList =  productRepository.findByproductNameContainingIgnoreCase(name);
+        List<Product> showList = new ArrayList<>();
+        if(productList.isEmpty()){
+            throw new Exception("Product Not Found!!");
+        } else {
+            for (Product product : productList) {
+                if(product.getStatus().equals("ACTIVE")){
+                    showList.add(product);
+                }
+            }
+        }
+
+        if(showList.isEmpty()){
+            throw new Exception("Product Not Found!!");
+        }
+
+        return showList;
     }
 }

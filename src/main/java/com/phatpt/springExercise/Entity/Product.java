@@ -66,7 +66,7 @@ public class Product implements Serializable{
     }
 
     public Product(String productName, float productPrice, String image, Date createDate, Date updateDate,
-            String productDescription, Category category, int quantity) {
+            String productDescription, Category category, int quantity, String status) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.image = image;
@@ -75,6 +75,7 @@ public class Product implements Serializable{
         this.productDescription = productDescription;
         this.category = category;
         this.quantity = quantity;
+        this.status = status;
     }
 
     public long getProductId() {
