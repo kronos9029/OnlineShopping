@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.phatpt.springExercise.Repository.OrderDetailRepository;
-import com.phatpt.springExercise.Service.OrderDetailService;
-import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Entity.Order;
-import com.phatpt.springExercise.Entity.OrderDetail;
-import com.phatpt.springExercise.Entity.Product;
+import com.phatpt.springExercise.entity.Category;
+import com.phatpt.springExercise.entity.Order;
+import com.phatpt.springExercise.entity.OrderDetail;
+import com.phatpt.springExercise.entity.Product;
+import com.phatpt.springExercise.repository.OrderDetailRepository;
+import com.phatpt.springExercise.service.OrderDetailService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

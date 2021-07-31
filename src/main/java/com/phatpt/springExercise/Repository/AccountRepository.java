@@ -1,8 +1,8 @@
-package com.phatpt.springExercise.Repository;
+package com.phatpt.springExercise.repository;
 
 import java.util.Optional;
 
-import com.phatpt.springExercise.Entity.Account;
+import com.phatpt.springExercise.entity.Account;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

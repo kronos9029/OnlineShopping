@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Service;
+package com.phatpt.springExercise.service;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -10,17 +10,17 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.Entity.Account;
-import com.phatpt.springExercise.Entity.Order;
-import com.phatpt.springExercise.Entity.OrderDetail;
-import com.phatpt.springExercise.Entity.OrderStatus;
-import com.phatpt.springExercise.Entity.StatusName;
-import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Entity.ShoppingCart;
-import com.phatpt.springExercise.Exception.OrderNotFoundException;
-import com.phatpt.springExercise.Repository.OrderRepository;
-import com.phatpt.springExercise.Repository.ProductRepository;
-import com.phatpt.springExercise.Repository.StatusRepository;
+import com.phatpt.springExercise.exception.OrderNotFoundException;
+import com.phatpt.springExercise.repository.OrderRepository;
+import com.phatpt.springExercise.repository.ProductRepository;
+import com.phatpt.springExercise.repository.StatusRepository;
+import com.phatpt.springExercise.entity.Account;
+import com.phatpt.springExercise.entity.Order;
+import com.phatpt.springExercise.entity.OrderDetail;
+import com.phatpt.springExercise.entity.OrderStatus;
+import com.phatpt.springExercise.entity.Product;
+import com.phatpt.springExercise.entity.ShoppingCart;
+import com.phatpt.springExercise.entity.StatusName;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

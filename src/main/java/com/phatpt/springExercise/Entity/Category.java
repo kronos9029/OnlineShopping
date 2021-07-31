@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Entity;
+package com.phatpt.springExercise.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class Category implements Serializable{
     private String cateDescription;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
     public Category() {

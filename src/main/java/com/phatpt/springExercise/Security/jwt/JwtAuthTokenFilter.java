@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Security.jwt;
+package com.phatpt.springExercise.security.jwt;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.phatpt.springExercise.Security.Service.AccountDetailService;
+import com.phatpt.springExercise.security.service.AccountDetailService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter{
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
 
     public JwtAuthTokenFilter(JwtUtils jwtUtils,
-            com.phatpt.springExercise.Security.Service.AccountDetailService accountDeatailService) {
+            com.phatpt.springExercise.security.service.AccountDetailService accountDeatailService) {
         this.jwtUtils = jwtUtils;
         this.accountDeatailService = accountDeatailService;
     }

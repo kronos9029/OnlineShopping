@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Repository.ProductRepository;
-import com.phatpt.springExercise.Service.ProductService;
+import com.phatpt.springExercise.entity.Category;
+import com.phatpt.springExercise.entity.Product;
+import com.phatpt.springExercise.repository.ProductRepository;
+import com.phatpt.springExercise.service.ProductService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

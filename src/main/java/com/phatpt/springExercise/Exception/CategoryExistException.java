@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Exception;
+package com.phatpt.springExercise.exception;
 
 public class CategoryExistException extends RuntimeException {
     public CategoryExistException(String name){

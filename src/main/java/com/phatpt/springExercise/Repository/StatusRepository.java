@@ -1,9 +1,9 @@
-package com.phatpt.springExercise.Repository;
+package com.phatpt.springExercise.repository;
 
 import java.util.Optional;
 
-import com.phatpt.springExercise.Entity.OrderStatus;
-import com.phatpt.springExercise.Entity.StatusName;
+import com.phatpt.springExercise.entity.OrderStatus;
+import com.phatpt.springExercise.entity.StatusName;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

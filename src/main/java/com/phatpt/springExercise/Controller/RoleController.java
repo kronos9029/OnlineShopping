@@ -1,6 +1,6 @@
-package com.phatpt.springExercise.Controller;
+package com.phatpt.springExercise.controller;
 
-import com.phatpt.springExercise.Service.RoleService;
+import com.phatpt.springExercise.service.RoleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

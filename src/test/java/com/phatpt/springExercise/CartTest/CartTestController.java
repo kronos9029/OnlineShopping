@@ -4,8 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.phatpt.springExercise.SpringExerciseApplication;
-// import com.phatpt.springExercise.Controller.ShoppingCartController;
-import com.phatpt.springExercise.Entity.ShoppingCart;
+import com.phatpt.springExercise.entity.ShoppingCart;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

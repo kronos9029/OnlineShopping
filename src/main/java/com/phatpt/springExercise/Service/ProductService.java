@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Service;
+package com.phatpt.springExercise.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,12 +8,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Entity.ShoppingCart;
-import com.phatpt.springExercise.Exception.ProductNotFoundException;
-import com.phatpt.springExercise.Repository.CategoryRepository;
-import com.phatpt.springExercise.Repository.ProductRepository;
+import com.phatpt.springExercise.exception.ProductNotFoundException;
+import com.phatpt.springExercise.repository.CategoryRepository;
+import com.phatpt.springExercise.repository.ProductRepository;
+import com.phatpt.springExercise.entity.Category;
+import com.phatpt.springExercise.entity.Product;
+import com.phatpt.springExercise.entity.ShoppingCart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +37,7 @@ public class ProductService {
         return (List<Product>) this.productRepository.findAll();
     }
 
-    public List<Product> getAllActiveProduct(){
+    public List<Product> getAllActiveProduct() {
         return this.productRepository.findActiveProduct();
     }
 
@@ -74,6 +74,7 @@ public class ProductService {
         product.setProductDescription(productDetail.getProductDescription());
         product.setUpdateDate(currentDate);
         product.setStatus(productDetail.getStatus());
+        product.setQuantity(productDetail.getQuantity());
         product.setCartQuantity(0);
 
         return ResponseEntity.ok(this.productRepository.save(product));
@@ -83,7 +84,7 @@ public class ProductService {
     public Map<String, Boolean> deleteProduct(Long productId) throws Exception {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
-        if(product == null){
+        if (product == null) {
             throw new Exception("ERROR AT Delete Controller");
         }
         this.productRepository.deleteProduct(productId);
@@ -99,7 +100,8 @@ public class ProductService {
     }
 
     public Map<String, Boolean> setProductCategoryIfDeleted(Product product) {
-        product.setCategory(null);
+        Category none = categoryRepository.findCateById(3L);
+        product.setCategory(none);
         this.productRepository.save(product);
         Map<String, Boolean> response = new HashMap<>();
         response.put("Set NULL", Boolean.TRUE);
@@ -123,29 +125,32 @@ public class ProductService {
         return shoppingCart;
     }
 
-    public List<Product> findProductByName(String name) throws Exception{
-        List<Product> productList =  productRepository.findByproductNameContainingIgnoreCase(name);
-        if(productList.isEmpty()){
-            throw new Exception("Product Not Found!!");
+    public List<Product> findProductByName(String name) throws Exception {
+        List<Product> emptyList = new ArrayList<>();
+
+        if(name.isEmpty()){
+            return emptyList;
         }
+        List<Product> productList = productRepository.findByproductNameContainingIgnoreCase(name);
         return productList;
     }
 
-    public List<Product> findproductByNameCustomer(String name) throws Exception{
-        List<Product> productList =  productRepository.findByproductNameContainingIgnoreCase(name);
+    public List<Product> findproductByNameCustomer(String name) throws Exception {
+        List<Product> productList = productRepository.findByproductNameContainingIgnoreCase(name);
         List<Product> showList = new ArrayList<>();
-        if(productList.isEmpty()){
-            throw new Exception("Product Not Found!!");
-        } else {
-            for (Product product : productList) {
-                if(product.getStatus().equals("ACTIVE")){
-                    showList.add(product);
-                }
+
+        if(name.isEmpty()){
+            return showList;
+        }
+
+        for (Product product : productList) {
+            if (product.getStatus().equals("ACTIVE")) {
+                showList.add(product);
             }
         }
 
-        if(showList.isEmpty()){
-            throw new Exception("Product Not Found!!");
+        if (showList.isEmpty()) {
+            return showList;
         }
 
         return showList;

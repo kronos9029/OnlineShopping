@@ -1,10 +1,10 @@
-package com.phatpt.springExercise.Controller;
+package com.phatpt.springExercise.controller;
 
 import java.util.List;
 import java.util.Map;
 
-import com.phatpt.springExercise.Entity.OrderDetail;
-import com.phatpt.springExercise.Service.OrderDetailService;
+import com.phatpt.springExercise.entity.OrderDetail;
+import com.phatpt.springExercise.service.OrderDetailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

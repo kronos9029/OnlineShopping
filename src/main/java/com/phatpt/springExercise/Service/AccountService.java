@@ -1,11 +1,11 @@
-package com.phatpt.springExercise.Service;
+package com.phatpt.springExercise.service;
 
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.Entity.Account;
-import com.phatpt.springExercise.Repository.AccountRepository;
+import com.phatpt.springExercise.repository.AccountRepository;
+import com.phatpt.springExercise.entity.Account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

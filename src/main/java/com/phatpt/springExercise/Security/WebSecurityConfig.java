@@ -1,9 +1,9 @@
-package com.phatpt.springExercise.Security;
+package com.phatpt.springExercise.security;
 
-import com.phatpt.springExercise.Security.Service.AccountDetailService;
-import com.phatpt.springExercise.Security.jwt.JwtAuthEntryPoint;
-import com.phatpt.springExercise.Security.jwt.JwtAuthTokenFilter;
-import com.phatpt.springExercise.Security.jwt.JwtUtils;
+import com.phatpt.springExercise.security.service.AccountDetailService;
+import com.phatpt.springExercise.security.jwt.JwtAuthEntryPoint;
+import com.phatpt.springExercise.security.jwt.JwtAuthTokenFilter;
+import com.phatpt.springExercise.security.jwt.JwtUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

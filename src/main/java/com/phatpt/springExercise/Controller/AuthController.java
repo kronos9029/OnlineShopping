@@ -1,13 +1,13 @@
-package com.phatpt.springExercise.Controller;
+package com.phatpt.springExercise.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.phatpt.springExercise.Service.AuthService;
-import com.phatpt.springExercise.Validate.Validate;
 import com.phatpt.springExercise.payload.request.LoginRequest;
 import com.phatpt.springExercise.payload.request.RegisterRequest;
+import com.phatpt.springExercise.service.AuthService;
+import com.phatpt.springExercise.validate.Validate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

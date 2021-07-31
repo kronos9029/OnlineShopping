@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Security.jwt;
+package com.phatpt.springExercise.security.jwt;
 
 import java.io.IOException;
 

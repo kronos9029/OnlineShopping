@@ -1,11 +1,11 @@
-package com.phatpt.springExercise.Controller;
+package com.phatpt.springExercise.controller;
 
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.Entity.Account;
-import com.phatpt.springExercise.Service.AccountService;
+import com.phatpt.springExercise.entity.Account;
+import com.phatpt.springExercise.service.AccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

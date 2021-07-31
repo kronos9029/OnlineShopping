@@ -1,6 +1,6 @@
-package com.phatpt.springExercise.Exception;
+package com.phatpt.springExercise.exception;
 
-import com.phatpt.springExercise.Entity.RoleName;
+import com.phatpt.springExercise.entity.RoleName;
 
 public class RoleExistException extends RuntimeException {
     public RoleExistException(RoleName roleName){

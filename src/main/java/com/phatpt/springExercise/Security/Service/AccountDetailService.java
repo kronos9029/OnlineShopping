@@ -1,7 +1,8 @@
-package com.phatpt.springExercise.Security.Service;
 
-import com.phatpt.springExercise.Entity.Account;
-import com.phatpt.springExercise.Repository.AccountRepository;
+package com.phatpt.springExercise.security.service;
+
+import com.phatpt.springExercise.repository.AccountRepository;
+import com.phatpt.springExercise.entity.Account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,7 @@ public class AccountDetailService implements UserDetailsService {
     private final AccountRepository accountRepository;
 
     @Autowired
-    public AccountDetailService(com.phatpt.springExercise.Repository.AccountRepository accountRepository) {
+    public AccountDetailService(com.phatpt.springExercise.repository.AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 

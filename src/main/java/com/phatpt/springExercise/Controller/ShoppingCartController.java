@@ -1,9 +1,9 @@
-package com.phatpt.springExercise.Controller;
+package com.phatpt.springExercise.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.phatpt.springExercise.Entity.ShoppingCart;
-import com.phatpt.springExercise.Service.ShoppingCartService;
+import com.phatpt.springExercise.entity.ShoppingCart;
+import com.phatpt.springExercise.service.ShoppingCartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

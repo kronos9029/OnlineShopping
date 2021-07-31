@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Exception;
+package com.phatpt.springExercise.exception;
 
 public class ProductNotFoundException extends RuntimeException {
     public ProductNotFoundException(Long id){

@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Validate;
+package com.phatpt.springExercise.validate;
 
 import java.util.HashMap;
 import java.util.Map;

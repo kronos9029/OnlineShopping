@@ -1,8 +1,8 @@
-package com.phatpt.springExercise.Repository;
+package com.phatpt.springExercise.repository;
 
 import java.util.List;
 
-import com.phatpt.springExercise.Entity.OrderDetail;
+import com.phatpt.springExercise.entity.OrderDetail;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

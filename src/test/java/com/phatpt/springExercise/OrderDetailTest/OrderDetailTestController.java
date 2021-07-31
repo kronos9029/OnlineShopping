@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.phatpt.springExercise.SpringExerciseApplication;
-import com.phatpt.springExercise.Entity.OrderDetail;
+import com.phatpt.springExercise.entity.OrderDetail;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

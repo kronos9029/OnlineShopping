@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Entity;
+package com.phatpt.springExercise.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -56,6 +56,8 @@ public class Product implements Serializable{
     private Category category;
 
     @Column(name = "quantity")
+    @NotNull
+    @Positive
     private int quantity;
 
     @Column(name = "cart_quantity", nullable = true)

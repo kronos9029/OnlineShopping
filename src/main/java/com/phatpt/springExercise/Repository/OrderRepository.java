@@ -1,8 +1,8 @@
-package com.phatpt.springExercise.Repository;
+package com.phatpt.springExercise.repository;
 
 import java.util.List;
 
-import com.phatpt.springExercise.Entity.Order;
+import com.phatpt.springExercise.entity.Order;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -10,11 +10,11 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Entity.ShoppingCart;
-import com.phatpt.springExercise.Repository.ProductRepository;
-import com.phatpt.springExercise.Service.ShoppingCartService;
+import com.phatpt.springExercise.entity.Category;
+import com.phatpt.springExercise.entity.Product;
+import com.phatpt.springExercise.entity.ShoppingCart;
+import com.phatpt.springExercise.repository.ProductRepository;
+import com.phatpt.springExercise.service.ShoppingCartService;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,10 +1,10 @@
-package com.phatpt.springExercise.Repository;
+package com.phatpt.springExercise.repository;
 
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.phatpt.springExercise.Entity.Product;
+import com.phatpt.springExercise.entity.Product;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

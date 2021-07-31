@@ -1,14 +1,14 @@
-package com.phatpt.springExercise.Controller;
+package com.phatpt.springExercise.controller;
 
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.Entity.Order;
-import com.phatpt.springExercise.Entity.ShoppingCart;
-import com.phatpt.springExercise.Service.OrderService;
-import com.phatpt.springExercise.Service.ProductService;
+import com.phatpt.springExercise.entity.Order;
+import com.phatpt.springExercise.entity.ShoppingCart;
+import com.phatpt.springExercise.service.OrderService;
+import com.phatpt.springExercise.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

@@ -1,8 +1,8 @@
 package com.phatpt.springExercise;
 
-import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Repository.CategoryRepository;
-import com.phatpt.springExercise.Service.CategoryService;
+import com.phatpt.springExercise.entity.Category;
+import com.phatpt.springExercise.repository.CategoryRepository;
+import com.phatpt.springExercise.service.CategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

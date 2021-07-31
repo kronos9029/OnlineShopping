@@ -1,9 +1,8 @@
-package com.phatpt.springExercise.Validate;
+package com.phatpt.springExercise.validate;
 
 import com.phatpt.springExercise.payload.request.LoginRequest;
 
 public class Validate {
-    
     public static void validateLogin(LoginRequest loginRequest){
         try {
             if(loginRequest.getUsername().length() == 0 || loginRequest.getPassword().length() == 0){

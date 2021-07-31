@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Entity;
+package com.phatpt.springExercise.entity;
 
 public enum StatusName {
     ORDERING,

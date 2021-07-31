@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 import com.phatpt.springExercise.SpringExerciseApplication;
-import com.phatpt.springExercise.Entity.Order;
+import com.phatpt.springExercise.entity.Order;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

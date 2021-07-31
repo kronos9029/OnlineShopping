@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Security.Service;
+package com.phatpt.springExercise.security.service;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.phatpt.springExercise.Entity.Account;
+import com.phatpt.springExercise.entity.Account;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

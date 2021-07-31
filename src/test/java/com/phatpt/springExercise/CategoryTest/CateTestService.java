@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Repository.CategoryRepository;
-import com.phatpt.springExercise.Service.CategoryService;
+import com.phatpt.springExercise.entity.Category;
+import com.phatpt.springExercise.repository.CategoryRepository;
+import com.phatpt.springExercise.service.CategoryService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -62,8 +62,8 @@ public class CateTestService {
         Optional<Category> optional = Optional.of(cate);
         assertNotNull(optional);
         when(categoryRepository.findById(CateID)).thenReturn(optional);
-        ResponseEntity<Category> cate2 = categoryService.getProductById(CateID);
-        assertEquals(cate2.getBody().getCateName(), cate.getCateName());
+        Category cate2 = categoryService.getCateById(CateID);
+        assertEquals(cate2.getCateName(), cate.getCateName());
     }
     @Test
     public void saveCate() throws Exception {

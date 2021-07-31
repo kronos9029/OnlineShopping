@@ -1,11 +1,11 @@
-package com.phatpt.springExercise.Service;
+package com.phatpt.springExercise.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Entity.ShoppingCart;
-import com.phatpt.springExercise.Exception.ProductNotFoundException;
-import com.phatpt.springExercise.Repository.ProductRepository;
+import com.phatpt.springExercise.exception.ProductNotFoundException;
+import com.phatpt.springExercise.repository.ProductRepository;
+import com.phatpt.springExercise.entity.Product;
+import com.phatpt.springExercise.entity.ShoppingCart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

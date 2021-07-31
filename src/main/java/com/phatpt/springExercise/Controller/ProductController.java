@@ -1,11 +1,11 @@
-package com.phatpt.springExercise.Controller;
+package com.phatpt.springExercise.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Service.ProductService;
+import com.phatpt.springExercise.entity.Product;
+import com.phatpt.springExercise.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

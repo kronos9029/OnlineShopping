@@ -1,13 +1,13 @@
-package com.phatpt.springExercise.Service;
+package com.phatpt.springExercise.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Entity.Product;
-import com.phatpt.springExercise.Exception.CategoryNotFoundException;
-import com.phatpt.springExercise.Repository.CategoryRepository;
+import com.phatpt.springExercise.exception.CategoryNotFoundException;
+import com.phatpt.springExercise.repository.CategoryRepository;
+import com.phatpt.springExercise.entity.Category;
+import com.phatpt.springExercise.entity.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +33,11 @@ public class CategoryService {
     }
 
     // Get Cate By ID
-    public ResponseEntity<Category> getProductById(Long cateId) throws CategoryNotFoundException {
+    public Category getCateById(Long cateId) throws CategoryNotFoundException {
         Category category = categoryRepository.findById(cateId)
                 .orElseThrow(() -> new CategoryNotFoundException(cateId));
 
-        return ResponseEntity.ok().body(category);
+        return category;
     }
 
     // Save Cate
@@ -56,7 +56,6 @@ public class CategoryService {
         return ResponseEntity.ok(this.categoryRepository.save(category));
     }
 
-    // Delete Product
     public Map<String, Boolean> deleteCate(Long cateId) {
         Category category = categoryRepository.findById(cateId)
                 .orElseThrow(() -> new CategoryNotFoundException(cateId));

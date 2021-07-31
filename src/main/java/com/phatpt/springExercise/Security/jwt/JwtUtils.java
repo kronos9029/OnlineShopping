@@ -1,8 +1,8 @@
-package com.phatpt.springExercise.Security.jwt;
+package com.phatpt.springExercise.security.jwt;
 
 import java.util.Date;
 
-import com.phatpt.springExercise.Security.Service.AccountDetailImpl;
+import com.phatpt.springExercise.security.service.AccountDetailImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

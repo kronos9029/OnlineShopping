@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Date;
 
 import com.phatpt.springExercise.SpringExerciseApplication;
-import com.phatpt.springExercise.Entity.Product;
+import com.phatpt.springExercise.entity.Product;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

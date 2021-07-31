@@ -1,4 +1,4 @@
-package com.phatpt.springExercise.Service;
+package com.phatpt.springExercise.service;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.Entity.Account;
-import com.phatpt.springExercise.Entity.Role;
-import com.phatpt.springExercise.Entity.RoleName;
-import com.phatpt.springExercise.Repository.AccountRepository;
-import com.phatpt.springExercise.Repository.RoleRepository;
-import com.phatpt.springExercise.Security.Service.AccountDetailImpl;
-import com.phatpt.springExercise.Security.jwt.JwtUtils;
+import com.phatpt.springExercise.repository.AccountRepository;
+import com.phatpt.springExercise.repository.RoleRepository;
+import com.phatpt.springExercise.security.service.AccountDetailImpl;
+import com.phatpt.springExercise.security.jwt.JwtUtils;
+import com.phatpt.springExercise.entity.Account;
+import com.phatpt.springExercise.entity.Role;
+import com.phatpt.springExercise.entity.RoleName;
 import com.phatpt.springExercise.payload.request.LoginRequest;
 import com.phatpt.springExercise.payload.request.RegisterRequest;
 import com.phatpt.springExercise.payload.response.JwtResponse;

@@ -1,10 +1,10 @@
-package com.phatpt.springExercise.Service;
+package com.phatpt.springExercise.service;
 
 import java.util.List;
 
-import com.phatpt.springExercise.Entity.Role;
-import com.phatpt.springExercise.Exception.RoleExistException;
-import com.phatpt.springExercise.Repository.RoleRepository;
+import com.phatpt.springExercise.exception.RoleExistException;
+import com.phatpt.springExercise.repository.RoleRepository;
+import com.phatpt.springExercise.entity.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class RoleService {
     private final RoleRepository roleRepository;
 
     @Autowired
-    public RoleService(com.phatpt.springExercise.Repository.RoleRepository roleRepository) {
+    public RoleService(com.phatpt.springExercise.repository.RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 

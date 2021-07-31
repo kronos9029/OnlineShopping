@@ -1,6 +1,6 @@
-package com.phatpt.springExercise.Repository;
+package com.phatpt.springExercise.repository;
 
-import com.phatpt.springExercise.Entity.Category;
+import com.phatpt.springExercise.entity.Category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

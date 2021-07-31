@@ -1,10 +1,10 @@
-package com.phatpt.springExercise.Controller;
+package com.phatpt.springExercise.controller;
 
 import java.util.List;
 import java.util.Map;
 
-import com.phatpt.springExercise.Entity.Category;
-import com.phatpt.springExercise.Service.CategoryService;
+import com.phatpt.springExercise.entity.Category;
+import com.phatpt.springExercise.service.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +36,8 @@ public class CategoryController {
     }
 
     @GetMapping("/{cateId}")
-    public ResponseEntity<Category> getProductById(@PathVariable(value = "cateId") Long cateId) {
-        return categoryService.getProductById(cateId);
+    public Category getProductById(@PathVariable(value = "cateId") Long cateId) {
+        return categoryService.getCateById(cateId);
     }
 
     @PostMapping("")
