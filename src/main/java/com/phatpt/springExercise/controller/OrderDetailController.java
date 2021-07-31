@@ -39,7 +39,7 @@ public class OrderDetailController {
     }
 
     @DeleteMapping("/{detailsId}")
-    public Map<String, Boolean> deleteOrderDetailById(@PathVariable(value = "detailsId") Long detailId){
+    public Map<String, Boolean> deleteOrderDetailById(@PathVariable(value = "detailsId") Long detailId) throws Exception{
         return this.orderDetailService.deleteOrderDetailById(detailId);
     }
 

@@ -45,7 +45,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/{orderId}")
-    public Map<String, Boolean> deleteOrder(@PathVariable(name = "orderId") Long orderId){
+    public Map<String, Boolean> deleteOrder(@PathVariable(name = "orderId") Long orderId) throws Exception{
         return this.orderService.deleteOrder(orderId);
     }
 
@@ -60,7 +60,7 @@ public class OrderController {
     }
 
     @PostMapping("/receive")
-    public Order updateStatus(@RequestParam("orderId") long id){
+    public Order updateStatus(@RequestParam("orderId") long id) throws Exception{
         return this.orderService.updateStatus(id);
     }
     

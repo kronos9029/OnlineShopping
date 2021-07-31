@@ -36,7 +36,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{cateId}")
-    public Category getProductById(@PathVariable(value = "cateId") Long cateId) {
+    public Category getProductById(@PathVariable(value = "cateId") Long cateId) throws Exception {
         return categoryService.getCateById(cateId);
     }
 
@@ -47,12 +47,12 @@ public class CategoryController {
 
     @PutMapping("/{cateId}")
     public ResponseEntity<Category> updateCategory(@RequestBody Category cateDetail,
-            @PathVariable(value = "cateId") Long cateId) {
+            @PathVariable(value = "cateId") Long cateId) throws Exception {
         return categoryService.updateCategory(cateDetail, cateId);
     }
 
     @DeleteMapping("/{cateId}")
-    public Map<String, Boolean> deleteCate(@PathVariable(value = "cateId") Long cateId) {
+    public Map<String, Boolean> deleteCate(@PathVariable(value = "cateId") Long cateId) throws Exception {
         return categoryService.deleteCate(cateId);
     }
 
