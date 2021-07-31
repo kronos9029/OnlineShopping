@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.exception.OrderNotFoundException;
 import com.phatpt.springExercise.repository.OrderRepository;
 import com.phatpt.springExercise.repository.ProductRepository;
 import com.phatpt.springExercise.repository.StatusRepository;
@@ -50,8 +49,8 @@ public class OrderService {
         return (List<Order>) this.orderRepository.findAll();
     }
 
-    public ResponseEntity<Order> getOrderById(long orderId) throws OrderNotFoundException {
-        Order order = this.orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(orderId));
+    public ResponseEntity<Order> getOrderById(long orderId) throws Exception {
+        Order order = this.orderRepository.findById(orderId).orElseThrow(() -> new Exception("Order Not Found!!"));
 
         return ResponseEntity.ok().body(order);
     }
@@ -86,8 +85,8 @@ public class OrderService {
         return newOrder;
     }
 
-    public Map<String, Boolean> deleteOrder(Long orderId) {
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(orderId));
+    public Map<String, Boolean> deleteOrder(Long orderId) throws Exception {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new Exception("Order Not Found!!"));
         List<OrderDetail> detailList = this.orderDetailService.getDetailByOrderId(order.getOrderId());
         if (detailList.size() != 0) {
             for (OrderDetail orderDetail : detailList) {
@@ -106,8 +105,8 @@ public class OrderService {
         return orderRepository.findOrdersByUserId(userId);
     }
 
-    public Order updateStatus(Long orderId) {
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(orderId));
+    public Order updateStatus(Long orderId) throws Exception {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new Exception("Order Not Found!!"));
         Set<OrderStatus> status = new HashSet<>();
         OrderStatus statusName = statusRepository.findByName(StatusName.RECEIVED).orElseThrow();
         status.add(statusName);

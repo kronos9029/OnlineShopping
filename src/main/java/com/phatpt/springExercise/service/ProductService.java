@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.exception.ProductNotFoundException;
 import com.phatpt.springExercise.repository.CategoryRepository;
 import com.phatpt.springExercise.repository.ProductRepository;
 import com.phatpt.springExercise.entity.Category;
@@ -42,9 +41,10 @@ public class ProductService {
     }
 
     // Get Product By ID
-    public ResponseEntity<Product> getProductById(Long productId) throws ProductNotFoundException {
+    public ResponseEntity<Product> getProductById(Long productId) throws Exception {
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException(productId));
+                .orElseThrow(() -> new Exception("Product Not Found!!"));
+
 
         return ResponseEntity.ok().body(product);
     }
@@ -63,9 +63,9 @@ public class ProductService {
     }
 
     // Update Product
-    public ResponseEntity<Product> updateProduct(Product productDetail, Long productId) {
+    public ResponseEntity<Product> updateProduct(Product productDetail, Long productId) throws Exception {
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException(productId));
+                .orElseThrow(() -> new Exception("Product Not Found!!"));
 
         product.setProductName(productDetail.getProductName());
         product.setCategory(productDetail.getCategory());
@@ -83,7 +83,8 @@ public class ProductService {
     // Delete Product
     public Map<String, Boolean> deleteProduct(Long productId) throws Exception {
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException(productId));
+                .orElseThrow(() -> new Exception("Product Not Found!!"));
+
         if (product == null) {
             throw new Exception("ERROR AT Delete Controller");
         }

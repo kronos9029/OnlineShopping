@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.phatpt.springExercise.exception.CategoryNotFoundException;
 import com.phatpt.springExercise.repository.CategoryRepository;
 import com.phatpt.springExercise.entity.Category;
 import com.phatpt.springExercise.entity.Product;
@@ -33,9 +32,9 @@ public class CategoryService {
     }
 
     // Get Cate By ID
-    public Category getCateById(Long cateId) throws CategoryNotFoundException {
-        Category category = categoryRepository.findById(cateId)
-                .orElseThrow(() -> new CategoryNotFoundException(cateId));
+    public Category getCateById(Long cateId) throws Exception{
+        Category category = categoryRepository.findById(cateId).orElseThrow(() -> new Exception("Product Not Found!!"));
+                
 
         return category;
     }
@@ -46,9 +45,9 @@ public class CategoryService {
     }
 
     // Update Cate
-    public ResponseEntity<Category> updateCategory(Category cateDetail, Long cateId) {
+    public ResponseEntity<Category> updateCategory(Category cateDetail, Long cateId) throws Exception {
         Category category = categoryRepository.findById(cateId)
-                .orElseThrow(() -> new CategoryNotFoundException(cateId));
+                .orElseThrow(() -> new Exception("Category Not Found"));
 
         category.setCateName(cateDetail.getCateName());
         category.setCateDescription(cateDetail.getCateDescription());
@@ -56,9 +55,9 @@ public class CategoryService {
         return ResponseEntity.ok(this.categoryRepository.save(category));
     }
 
-    public Map<String, Boolean> deleteCate(Long cateId) {
+    public Map<String, Boolean> deleteCate(Long cateId) throws Exception {
         Category category = categoryRepository.findById(cateId)
-                .orElseThrow(() -> new CategoryNotFoundException(cateId));
+                .orElseThrow(() -> new Exception("Category Not Found"));
 
         List<Product> listProduct = productService.findAllProductsByCateId(category.getCateId());
         if (listProduct.size() != 0) {

@@ -2,7 +2,6 @@ package com.phatpt.springExercise.service;
 
 import java.util.List;
 
-import com.phatpt.springExercise.exception.RoleExistException;
 import com.phatpt.springExercise.repository.RoleRepository;
 import com.phatpt.springExercise.entity.Role;
 
@@ -22,8 +21,8 @@ public class RoleService {
         return (List<Role>) this.roleRepository.findAll();
     }
 
-    public Role createRole(Role newRole){
-        roleRepository.findByName(newRole.getRoleName()).orElseThrow(() -> new RoleExistException(newRole.getRoleName()));
+    public Role createRole(Role newRole) throws Exception{
+        roleRepository.findByName(newRole.getRoleName()).orElseThrow(() -> new Exception("Role Not Found!!"));
         return this.roleRepository.save(newRole);
     }
     

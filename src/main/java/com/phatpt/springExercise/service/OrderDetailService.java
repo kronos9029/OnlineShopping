@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.phatpt.springExercise.exception.OrderDetailNotFoundException;
 import com.phatpt.springExercise.repository.OrderDetailRepository;
 import com.phatpt.springExercise.repository.StatusRepository;
 import com.phatpt.springExercise.entity.Order;
@@ -40,9 +39,9 @@ public class OrderDetailService {
         return (List<OrderDetail>) this.orderDetailRepository.findDetailByOrderId(orderId);
     }
 
-    public Map<String, Boolean> deleteOrderDetailById(long detailId){
+    public Map<String, Boolean> deleteOrderDetailById(long detailId) throws Exception{
         OrderDetail orderDetail = orderDetailRepository.findById(detailId)
-                                                .orElseThrow(() -> new OrderDetailNotFoundException(detailId));
+                                                .orElseThrow(() -> new Exception("Order Detail Not Found!!"));
         this.orderDetailRepository.delete(orderDetail);
 
         Map<String, Boolean> response = new HashMap<>();

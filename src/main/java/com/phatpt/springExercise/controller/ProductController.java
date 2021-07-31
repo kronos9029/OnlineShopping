@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable(value = "productId") Long productId) {
+    public ResponseEntity<Product> getProductById(@PathVariable(value = "productId") Long productId) throws Exception {
         return productService.getProductById(productId);
     }
 
@@ -55,7 +55,7 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product productDetail, @PathVariable(value = "productId") Long productId){
+    public ResponseEntity<Product> updateProduct(@RequestBody Product productDetail, @PathVariable(value = "productId") Long productId) throws Exception{
         return productService.updateProduct(productDetail, productId);
     }
     

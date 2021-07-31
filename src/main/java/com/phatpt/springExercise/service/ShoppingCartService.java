@@ -2,7 +2,6 @@ package com.phatpt.springExercise.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.phatpt.springExercise.exception.ProductNotFoundException;
 import com.phatpt.springExercise.repository.ProductRepository;
 import com.phatpt.springExercise.entity.Product;
 import com.phatpt.springExercise.entity.ShoppingCart;
@@ -22,7 +21,7 @@ public class ShoppingCartService {
 
     public ShoppingCart addProductToCart(long productId, HttpServletRequest request) throws Exception {
         Product newProduct = productRepository.findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException(productId));
+                .orElseThrow(() -> new Exception("Product  Not Found!!"));
         ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
         if (shoppingCart == null) {
             shoppingCart = new ShoppingCart();
